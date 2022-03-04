@@ -425,11 +425,11 @@
                         </tbody>
 
                     </table>
-                    <table class="table table-bordered pull-right" style="width:60%" >
-                        <tr >
+                    <table class="table table-bordered pull-right" style="width:60%">
+                        <tr>
 
-                            <td >Total excluding VAT</td>
-                            <td  class="text-center">
+                            <td>Total excluding VAT</td>
+                            <td class="text-center">
                                 اﻹجمالي غير شامل الضريبة
                             </td>
                             <td style="text-align: right !important;">
@@ -445,8 +445,8 @@
                         </tr>
                         <tr>
 
-                            <td >Discount</td>
-                            <td  class="text-center">
+                            <td>Discount</td>
+                            <td class="text-center">
                                 مجموع الخصومات
                             </td>
                             <td style="text-align: right !important;">
@@ -456,9 +456,9 @@
                         </tr>
                         <tr>
 
-                            <td >Total Taxable Amount
+                            <td>Total Taxable Amount
                             </td>
-                            <td  class="text-center">
+                            <td class="text-center">
                                 الإجمالي الخاضع للضريبة
                             </td>
                             <td style="text-align: right !important;">
@@ -468,9 +468,9 @@
                         </tr>
                         <tr>
 
-                            <td >Total VAT
+                            <td>Total VAT
                             </td>
-                            <td  class="text-center">
+                            <td class="text-center">
                                 مجموع الضريبة
                             </td>
                             <td style="text-align: right !important;">
@@ -478,11 +478,11 @@
                                       t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                             </td>
                         </tr>
-                        <tr >
+                        <tr>
 
-                            <td class="ground-gray-black" >Total Amount Due
+                            <td class="ground-gray-black">Total Amount Due
                             </td>
-                            <td   class="ground-gray-black text-center">
+                            <td class="ground-gray-black text-center">
                                 إجمالي المبلغ المستحق
                             </td>
                             <td class="ground-gray-black" style="text-align: right !important;">
@@ -490,6 +490,44 @@
                                       t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                             </td>
                         </tr>
+                        <t >
+                            <t t-if="o.payment_state != 'invoicing_legacy'">
+                                <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                                <t t-foreach="payments_vals" t-as="payment_vals">
+                                    <tr>
+                                        <td>
+                                            <i class="oe_form_field text-right oe_payment_label">Paid on
+                                                <t t-esc="payment_vals['date']" t-options='{"widget": "date"}'/>
+                                            </i>
+                                        </td>
+                                        <td class="text-right">
+                                            <i class="oe_form_field text-right oe_payment_label">في تاريخ
+                                                <t t-esc="payment_vals['date']" t-options='{"widget": "date"}'/>
+                                            </i>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="payment_vals['amount']"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="len(payments_vals) > 0">
+                                    <tr class="border-black">
+                                        <td>
+                                            <strong>Amount Due</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong> المبلغ المُتَبَقي</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_residual"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+
+
                     </table>
 
                     <p t-if="o.invoice_terms_and_conditions" name="comment"
@@ -501,8 +539,6 @@
                        style="width:49%;display: inline-block !important;font-size:12px">
                         <span t-field="o.arabic_invoice_terms_and_conditions"/>
                     </p>
-
-
 
 
                 </div>
