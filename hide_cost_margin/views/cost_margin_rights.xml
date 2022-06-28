@@ -1,0 +1,79 @@
+<odoo>
+  <data>
+    <record id="view_sales_order_sale_cost_margin_rights" model="ir.ui.view">
+      <field name="name">sale.order.form.cost.margin.rights</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='purchase_price']"
+               position="replace">
+          <field name="purchase_price" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+        <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='margin']"
+               position="replace">
+          <field name="margin" groups="hide_cost_margin.udata_advanced" optional="hide"/>
+
+        </xpath>
+        <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='margin_percent']"
+               position="replace">
+          <field name="margin_percent"
+                 attrs="{'invisible': [('price_subtotal', '=', 0)]}"
+                 optional="hide" widget="percentage" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+
+        <xpath expr="//label[@for='margin']" position="replace">
+          <label for="margin" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+        <xpath expr="//div[hasclass('text-nowrap')]" position="replace">
+          <div class="text-nowrap" groups="hide_cost_margin.udata_advanced">
+            <field name="margin" class="oe_inline"/>
+            <field name="amount_untaxed" invisible="1"/>
+            <span class="oe_inline" attrs="{'invisible': [('amount_untaxed', '=', 0)]}">
+              (<field name="margin_percent" nolabel="1" class="oe_inline" widget="percentage"/>)
+            </span>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_form_view_sale_cost_rights">
+      <field name="name">product.product.sale.margin.rights</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_normal_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//label[@for='standard_price']" position="replace">
+          <label for="standard_price" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+        <xpath expr="//field[@name='standard_price']" position="replace">
+          <field name="standard_price" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="product_template_form_view_sale_cost_rights">
+      <field name="name">product.template.sale.margin.rights</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_only_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//label[@for='standard_price']" position="replace">
+          <label for="standard_price" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+        <xpath expr="//field[@name='standard_price']" position="replace">
+          <field name="standard_price" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_template_tree_view_sale_cost_rights">
+      <field name="name">product.template.sale.margin.rights.tree</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_tree_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='standard_price']" position="replace">
+          <field name="standard_price" groups="hide_cost_margin.udata_advanced"/>
+        </xpath>
+      </field>
+    </record>
+
+
+  </data>
+</odoo>

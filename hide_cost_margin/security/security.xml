@@ -1,0 +1,10 @@
+<odoo>
+        <record model="ir.module.category" id="group_udata">
+            <field name="name">Sale Margin Rights</field>
+            <field name="description">sale margin</field>
+        </record>
+        <record id="udata_advanced" model="res.groups">
+            <field name="name">sale margin</field>
+            <field name="category_id" ref="group_udata"/>
+        </record>
+</odoo>
