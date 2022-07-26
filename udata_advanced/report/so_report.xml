@@ -24,7 +24,7 @@
                 <div class="page" style="margin-top:50px">
                     <div class="oe_structure"/>
                     <div class="pull-right" style="width:40%">
-                                                <div class="" style="display: inline-block !important;float:right">
+                        <div class="" style="display: inline-block !important;float:right">
                             <img style="float:right"
                                  t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR',doc._get_url_order(), 75, 75)"/>
                         </div>
@@ -195,7 +195,8 @@
                                                    t-value="current_subtotal + (line.product_uom_qty * line.price_unit)"/>
                                             </t>
 
-                                            <span t-esc="current_subtotal" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                            <span t-esc="current_subtotal"
+                                                  t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
                                         </td>
                                     </tr>
                                     <tr class="border-black o_subtotal" style="">
@@ -247,6 +248,49 @@
                     </div>
 
 
+                    <div t-if="doc.sale_order_option_ids and doc.state in ['draft', 'sent']">
+                        <t t-set="has_option_discount"
+                           t-value="any(option.discount != 0.0 for option in doc.sale_order_option_ids)"/>
+                        <h4 name="h_optional_products">
+                            <span>Options</span>
+                        </h4>
+                        <table name="table_optional_products" class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th name="th_option_name" class="text-left">Description</th>
+                                    <th t-if="has_option_discount" name="th_option_discount"
+                                        groups="product.group_discount_per_so_line" class="text-left">Disc.%
+                                    </th>
+                                    <th name="th_option_price_unit" class="text-right">Unit Price</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+                                <tr t-foreach="doc.sale_order_option_ids" t-as="option">
+                                    <td name="td_option_name">
+                                        <span t-field="option.name"/>
+                                    </td>
+                                    <td t-if="has_option_discount" name="td_option_discount"
+                                        groups="product.group_discount_per_so_line">
+                                        <strong t-if="option.discount != 0.0" class="text-info">
+                                            <t t-esc="((option.discount % 1) and '%s' or '%d') % option.discount"/>%
+                                        </strong>
+                                    </td>
+                                    <td name="td_option_price_unit">
+                                        <strong class="text-right">
+                                            <div t-field="option.price_unit"
+                                                 t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                                                 t-att-style="option.discount and 'text-decoration: line-through' or None"
+                                                 t-att-class="option.discount and 'text-danger' or None"/>
+                                            <div t-if="option.discount">
+                                                <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)"/>
+                                            </div>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div class="oe_structure"/>
                     <br/>
 
@@ -255,7 +299,8 @@
                         <span t-field="doc.sale_terms_and_conditions"/>
                     </p>
 
-                    <p class="pull-right text-right"  dir="rtl" t-if="doc.arabic_sale_terms_and_conditions" name="comment"
+                    <p class="pull-right text-right" dir="rtl" t-if="doc.arabic_sale_terms_and_conditions"
+                       name="comment"
                        style="width:49%;display: inline-block !important;font-size:12px">
                         <span t-field="doc.arabic_sale_terms_and_conditions"/>
                     </p>
