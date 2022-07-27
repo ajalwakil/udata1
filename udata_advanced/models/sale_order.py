@@ -30,7 +30,7 @@ class SaleOrder(models.Model):
 
 
     def _get_url_order(self):
-        return 'https://udata1.odoo.com' + self.get_portal_url()
+        return 'https://udata.odoo.com' + self.get_portal_url()
 
 
     def action_reversion(self):
