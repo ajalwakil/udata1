@@ -23,18 +23,6 @@
                                         </t>
                                         .
                                     </span>
-                                    <br/>
-                                    <span>
-                                        رقم تذكرتك هو
-                                        <a t-if="request.session.uid" t-attf-href="/helpdesk/ticket/#{ticket.id}">
-                                            <span>#UDT-</span>
-                                            <span t-field="ticket.id"/>
-                                        </a>
-                                        <t t-if="not request.session.get('uid')"><span>#UDT-</span>
-                                            <span t-field="ticket.id"/>
-                                        </t>
-                                        .
-                                    </span>
                                 </t>
                             </h1>
                             <h1 class="text-center">Thank you for submitting your issue, our team will get right on
