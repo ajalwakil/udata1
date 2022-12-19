@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <template id="website_helpdesk_form_ticket_submited_inherit" name="Ticket Received"
+                  inherit_id="website_helpdesk_form.ticket_submited">
+            <xpath expr="//div[@id='wrap']" position="replace">
+                <div id="wrap" class="oe_structure oe_empty h-100">
+                    <div class="container d-flex flex-column justify-content-center h-100">
+                        <div class="row justify-content-center">
+                            <t t-if="request.session.get('form_builder_model_model', '') == 'helpdesk.ticket'">
+                                <t t-set="ticket" t-value="request.website._website_form_last_record().sudo()"/>
+                            </t>
+                            <h1 class="f">
+                                <i class="fa fa-check-circle fa-1x text-success mr-2" role="img" aria-label="Success"
+                                   title="Success"/>
+                                <t t-if="ticket">
+                                    <span>Your Ticket Number is
+                                        <a t-if="request.session.uid" t-attf-href="/helpdesk/ticket/#{ticket.id}">#UDT0001
+                                            <span t-field="ticket.id"/>
+                                        </a>
+                                        <t t-if="not request.session.get('uid')">#UDT0001
+                                            <span t-field="ticket.id"/>
+                                        </t>
+                                        .
+                                    </span>
+                                </t>
+                            </h1>
+                            <h1 class="text-center">Thank you for submitting your issue, our team will get right on
+                                it!
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

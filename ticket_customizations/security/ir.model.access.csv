@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ticket_customizations_ticket_customizations,ticket_customizations.ticket_customizations,model_ticket_customizations_ticket_customizations,base.group_user,1,1,1,1
