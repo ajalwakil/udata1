@@ -14,10 +14,11 @@
                                    title="Success"/>
                                 <t t-if="ticket">
                                     <span>Your Ticket Number is
-                                        <a t-if="request.session.uid" t-attf-href="/helpdesk/ticket/#{ticket.id}">#UDT0001
+                                        <a t-if="request.session.uid" t-attf-href="/helpdesk/ticket/#{ticket.id}">
+                                            <span>#UDT-</span>
                                             <span t-field="ticket.id"/>
                                         </a>
-                                        <t t-if="not request.session.get('uid')">#UDT0001
+                                        <t t-if="not request.session.get('uid')"><span>#UDT-</span>
                                             <span t-field="ticket.id"/>
                                         </t>
                                         .
