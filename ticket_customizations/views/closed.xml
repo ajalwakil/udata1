@@ -1,0 +1,42 @@
+<div>
+    Dear <t t-out="object.sudo().partner_id.name or 'Madam/Sir'" data-oe-t-inline="true" oe-keep-contenteditable=""
+            contenteditable="false">Madam/Sir</t>,
+    <br>
+    <br>
+    Due to non response from your side. we will close this ticket #UDT-
+    <t t-out="object.id or ''" data-oe-t-inline="true" oe-keep-contenteditable="" contenteditable="false">15</t>
+    <br>
+    your satisfaction is our goal.
+    <br>
+    <br>
+
+    Thank you,
+    <br>
+    <br>
+    <t t-out="object.team_id.name or 'Helpdesk'" data-oe-t-inline="true" oe-keep-contenteditable=""
+       contenteditable="false">Helpdesk
+    </t>
+    Team.
+    <br>
+    <br>&nbsp;<br>
+</div>
+
+<div class="text-right" style="box-sizing:border-box;text-align:right;float:right">
+,عزيزي
+<t t-out="object.sudo().partner_id.name or 'Madam/Sir'" data-oe-t-inline="true" oe-keep-contenteditable=""
+   contenteditable="false">السيد/السيدة
+</t>
+<br>
+<br>
+#UDT-<t t-out="object.id or ''" data-oe-t-inline="true" oe-keep-contenteditable="" contenteditable="false">15</t>
+<span>بسبب عدم الرد من جانبكم. سنغلق هذه التذكرة</span>
+<br>
+.رضاكم هو هدفنا
+<br>
+<br>
+
+. وشكراً
+<br>
+<br>
+فريق خدمات العملاء
+</div>

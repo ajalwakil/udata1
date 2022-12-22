@@ -1,0 +1,131 @@
+<div>
+    <t t-set="access_token" t-value="object.rating_get_access_token()" data-oe-t-inline="true"></t>
+    <t t-set="partner" t-value="object.rating_get_partner_id()" data-oe-t-inline="true"></t>
+    <table style="box-sizing:border-box;border-collapse:collapse;width:100%; margin:0;" width="100%" cellspacing="0"
+           cellpadding="0" border="0">
+        <tbody>
+            <tr>
+                <td style="font-size: 14px;" valign="top">
+                    <t t-if="partner.name" data-oe-t-group="0" data-oe-t-selectable="true"
+                       data-oe-t-group-active="true">
+                        Hello <t t-out="partner.name or ''" data-oe-t-inline="true" oe-keep-contenteditable=""
+                                 contenteditable="false">Brandon Freeman</t>,
+                        <br>
+                        <br>
+
+
+                        <p style="margin:0px 0 12px 0;box-sizing:border-box;">This automatic message informs you that we
+                            have solved your
+                            ticket
+
+                            <span style="color: #444b5a;font-size: 14px">"</span>
+                            <strong style="box-sizing:border-box;font-weight: 500;background-color: rgba(36, 154, 255, 0.16) ;color: #444b5a;font-size: 14px">
+                                Table legs are unbalanced
+                            </strong>
+                            <span style="color: #444b5a;font-size: 14px">"</span>
+
+                            . We hope that the services provided have met your
+                            expectations. If you have any questions or comments, don't hesitate to reply to
+                            this e-mail to re-open your ticket.
+                        </p>
+                    </t>
+                    <t t-else="" data-oe-t-selectable="true" data-oe-t-group="0" data-oe-t-inline="true">
+                        Hello,
+                        <br>
+                    </t>&nbsp;<br>
+                    <br>Please take a moment to rate our services related to the ticket "<strong
+                        t-out="object.name or ''" style="box-sizing:border-box;font-weight:500;"
+                        oe-keep-contenteditable="" contenteditable="false">Table legs are unbalanced</strong>"
+                    <br>
+
+                    <p style="margin:0px 0 12px 0;box-sizing:border-box;">
+                        <br>
+                    </p>
+                    <p style="margin:0px 0 12px 0;box-sizing:border-box;">
+                        <br>
+                    </p>
+                    <t t-if="object.rating_get_rated_partner_id().name" data-oe-t-group="1" data-oe-t-selectable="true"
+                       data-oe-t-group-active="true" data-oe-t-inline="true">
+                        assigned to <strong t-out="object.rating_get_rated_partner_id().name or ''"
+                                            style="box-sizing:border-box;font-weight:500;" oe-keep-contenteditable=""
+                                            contenteditable="false">Mitchell Admin</strong>.
+                    </t>
+                    <t t-else="" data-oe-t-selectable="true" data-oe-t-group="1" data-oe-t-inline="true">
+                        .
+                        <br>
+                    </t>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">
+                    <table summary="o_mail_notification"
+                           style="box-sizing:border-box;border-collapse:collapse;width:100%; margin: 32px 0px 32px 0px;"
+                           width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                            <tr>
+                                <td style="font-size: 14px;">
+                                    <strong style="box-sizing:border-box;font-weight:500;">Tell us how you feel about
+                                        our service
+                                    </strong>
+                                    <br>
+                                    <span style="text-color: #888888">(click on one of these smileys)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px;">
+                                    <table style="box-sizing:border-box;border-collapse:collapse;width:100%;text-align:center;margin-top:24px;"
+                                           width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a t-attf-href="/rate/{{ access_token }}/5"
+                                                       style="text-decoration:none;box-sizing:border-box;background-color:transparent;color:inherit;">
+                                                        <img alt="Satisfied" src="/rating/static/src/img/rating_5.png"
+                                                             title="Satisfied"
+                                                             style="border-style:none;box-sizing:border-box;vertical-align:middle;"
+                                                             width="69" height="69">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a t-attf-href="/rate/{{ access_token }}/3"
+                                                       style="text-decoration:none;box-sizing:border-box;background-color:transparent;color:inherit;">
+                                                        <img alt="Okay" src="/rating/static/src/img/rating_3.png"
+                                                             title="Okay"
+                                                             style="border-style:none;box-sizing:border-box;vertical-align:middle;"
+                                                             width="69" height="69">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a t-attf-href="/rate/{{ access_token }}/1"
+                                                       style="text-decoration:none;box-sizing:border-box;background-color:transparent;color:inherit;">
+                                                        <img alt="Dissatisfied"
+                                                             src="/rating/static/src/img/rating_1.png"
+                                                             title="Dissatisfied"
+                                                             style="border-style:none;box-sizing:border-box;vertical-align:middle;"
+                                                             width="69" height="69">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 14px;" valign="top">
+                    We appreciate your feedback. It helps us to improve continuously.
+                    <br>
+                    <span style="margin: 0px 0px 0px 0px; font-size: 12px; opacity: 0.5; color: #454748;">This customer
+                        survey has been sent because your ticket has been moved to the stage
+                        <b t-out="object.stage_id.name or ''" style="box-sizing:border-box;font-weight:500;"
+                           oe-keep-contenteditable="" contenteditable="false">In Progress
+                        </b>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
