@@ -12,6 +12,9 @@ class SaleOrder(models.Model):
     sale_reversion_id = fields.Many2one("sale.order")
     versioned = fields.Boolean(copy=False)
     sale_order_ids = fields.One2many(comodel_name="sale.order", inverse_name="sale_reversion_id",  string="Sales Orders", required=False, readonly=1)
+    date_order = fields.Datetime(string='Order Date', required=True, readonly=False, index=True, copy=False,
+                                 default=fields.Datetime.now,
+                                 help="Creation date of draft/sent orders,\nConfirmation date of confirmed orders.")
 
 
     @api.model
