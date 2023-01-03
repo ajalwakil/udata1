@@ -13,6 +13,7 @@
     'version': '14.1.2.0.0',
     'depends': ['sale_management'],
     'data': [
+        'security/security.xml',
         'report/so_report.xml',
         'views/sale_order_view.xml',
         'views/res_config_settings_view.xml',

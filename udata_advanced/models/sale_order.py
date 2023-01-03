@@ -15,6 +15,15 @@ class SaleOrder(models.Model):
     date_order = fields.Datetime(string='Order Date', required=True, readonly=False, index=True, copy=False,
                                  default=fields.Datetime.now,
                                  help="Creation date of draft/sent orders,\nConfirmation date of confirmed orders.")
+    date_order_check = fields.Boolean('date order check',compute='_compute_date_order_check')
+
+    def _compute_date_order_check(self):
+        check_date_order = self.env['res.users'].has_group('udata_advanced.group_sale_date_order_access')
+        self.date_order_check = False
+        if check_date_order:
+            self.date_order_check = True
+
+
 
 
     @api.model
