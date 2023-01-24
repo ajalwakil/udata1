@@ -13,6 +13,7 @@
     'version': '14.1.2.0.0',
     'depends': ['sale_management'],
     'data': [
+        # 'security/ir.model.access.csv',
         'security/security.xml',
         'report/so_report.xml',
         'views/sale_order_view.xml',
