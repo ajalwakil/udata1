@@ -3,5 +3,10 @@
         <record id="group_sale_date_order_access" model="res.groups">
             <field name="name">Sale date order Rights</field>
         </record>
+
+        <record id="group_sale_order_print_code_access" model="res.groups">
+            <field name="name">Sale order Print Code and Amount Rights</field>
+        </record>
+
     </data>
 </odoo>

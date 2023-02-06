@@ -5,7 +5,7 @@
 {
     'name': "UDATA ADVANCED",
     'summary': """""",
-    'description': """""",
+    'description': """udata advanced""",
     'author': "",
     'company': "",
     'website': "",
