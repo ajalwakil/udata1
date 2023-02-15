@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_arabic" model="ir.ui.view">
+            <field name="name">res.partner.vat.arabic</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='electronic_invoice']//group/field[@name='arabic_state_id']"
+                       position="before">
+                    <field name="arabic_city_id_new"/>
+                </xpath>
+                <xpath expr="//page[@name='electronic_invoice']//group/field[@name='arabic_state_id']" position="after">
+                    <field name="arabic_country_id_new"/>
+                </xpath>
+                <xpath expr="//page[@name='electronic_invoice']//group/field[@name='arabic_city']"
+                       position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='electronic_invoice']//group/field[@name='arabic_country_id']"
+                       position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

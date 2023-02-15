@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+"access_res_city_arabic","res_city_arabic","model_res_city_arabic","",1,1,1,1
+"access_res_country_arabic","res_country_arabic","model_res_country_arabic","",1,1,1,1
