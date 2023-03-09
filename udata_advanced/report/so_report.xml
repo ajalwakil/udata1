@@ -142,7 +142,7 @@
                                                 </td>
                                             </t>
                                             <td name="td_name">
-                                                <span t-field="line.product_id.name"/>
+                                                <span t-field="line.name"/>
                                             </td>
                                             <td name="td_quantity" class="text-right">
                                                 <span t-field="line.product_uom_qty"/>
