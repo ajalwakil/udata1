@@ -24,20 +24,76 @@
                 <xpath expr="//div[hasclass('page')]" position="replace">
                     <div class="page" style="margin-top:10px">
                         <div class="oe_structure"/>
-                        <div class="pull-right" style="width:40%">
-                            <div class="" style="display: inline-block !important;float:right">
-                                <img style="float:right"
-                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR',doc._get_url_order(), 75, 75)"/>
+                        <div class="pull-right" style="width:40%;margin-top:45px">
+<!--                            <div class="" style="display: inline-block !important;float:right">-->
+<!--                                <img style="float:right"-->
+<!--                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR',doc._get_url_order(), 75, 75)"/>-->
+<!--                            </div>-->
+
+<!--                            <div t-field="doc.partner_id" style="line-height: 100%;display: inline-block !important"-->
+<!--                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone", "mobile", "email"], "phone_icons": True, "no_marker": True}'/>-->
+                            <div style="line-height: 100%;display: inline-block !important">
+                                <table style="background-color:#fff">
+                                    <tr>
+                                        <td style="background-color:#fff">
+                                            <b>Customer:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+                                            <span t-field="doc.partner_id.name"/>
+                                        </td>
+
+                                    </tr>
+                                    <t t-if="doc.partner_id.phone">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Phone:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+
+                                                <span t-field="doc.partner_id.phone"/>
+
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="doc.partner_id.mobile">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Mobile:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+
+                                                <span t-field="doc.partner_id.mobile"/>
+
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="doc.partner_id.email">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Email:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="doc.partner_id.email"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="doc.partner_id.vat">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Tax ID:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="doc.partner_id.vat"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
                             </div>
 
-                            <div t-field="doc.partner_id" style="line-height: 100%;display: inline-block !important"
-                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone", "mobile", "email"], "phone_icons": True, "no_marker": True}'/>
-
-
-                            <p t-if="doc.partner_id.vat"><t
-                                    t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:
-                                <span t-field="doc.partner_id.vat"/>
-                            </p>
+<!--                            <p t-if="doc.partner_id.vat"><b><t-->
+<!--                                    t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:</b>-->
+<!--                                <span t-field="doc.partner_id.vat"/>-->
+<!--                            </p>-->
 
                         </div>
 
@@ -318,7 +374,14 @@
                            name="comment"
                            style="width:49%;display: inline-block !important;font-size:12px">
                             <span t-field="doc.arabic_sale_terms_and_conditions"/>
+
                         </p>
+                        <div style="margin-top:30px">
+                            <div class="" style="display: inline-block !important;float:right">
+                                <img style="float:right"
+                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR',doc._get_url_order(), 75, 75)"/>
+                            </div>
+                        </div>
                     </div>
                 </xpath>
             </t>
