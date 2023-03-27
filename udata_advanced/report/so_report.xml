@@ -1,6 +1,4 @@
 <odoo>
-
-
     <template id="external_layout_striped_custom" inherit_id="web.external_layout_striped">
         <xpath expr="//div" position="replace">
             <div t-attf-class="o_company_#{company.id}_layout header" t-att-style="report_header_style">
@@ -68,18 +66,16 @@
                                             </td>
                                         </tr>
                                     </t>
-                                    <!--                                    <t t-if="doc.partner_id.company_type == 'individual' and not doc.partner_id.parent_id">-->
-                                    <!--                                        <tr>-->
-                                    <!--                                            <td style="background-color:#fff;width:25%">-->
-                                    <!--                                                <b>Contact:</b>-->
-                                    <!--                                            </td>-->
-                                    <!--                                            <td style="background-color:#fff">-->
-
-                                    <!--                                                <span t-field="doc.partner_id.name"/>-->
-
-                                    <!--                                            </td>-->
-                                    <!--                                        </tr>-->
-                                    <!--                                    </t>-->
+                                    <t t-if="doc.partner_id.company_type == 'person' and not doc.partner_id.parent_id">
+                                        <tr>
+                                            <td style="background-color:#fff;width:25%">
+                                                <b>Contact:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="doc.partner_id.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
                                     <t t-if="doc.partner_id.phone">
                                         <tr>
                                             <td style="background-color:#fff">
