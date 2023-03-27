@@ -29,3 +29,8 @@ class ResConfigSettings(models.TransientModel):
             arabic_sale_terms_and_conditions=arabic_sale_terms_and_conditions,
         )
         return res
+
+class ResPartnerInherit(models.Model):
+    _inherit = 'res.partner'
+
+    is_customer = fields.Boolean(string="Is Customer")
