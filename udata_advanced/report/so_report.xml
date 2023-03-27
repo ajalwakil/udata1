@@ -68,6 +68,18 @@
                                             </td>
                                         </tr>
                                     </t>
+                                    <!--                                    <t t-if="doc.partner_id.company_type == 'individual' and not doc.partner_id.parent_id">-->
+                                    <!--                                        <tr>-->
+                                    <!--                                            <td style="background-color:#fff;width:25%">-->
+                                    <!--                                                <b>Contact:</b>-->
+                                    <!--                                            </td>-->
+                                    <!--                                            <td style="background-color:#fff">-->
+
+                                    <!--                                                <span t-field="doc.partner_id.name"/>-->
+
+                                    <!--                                            </td>-->
+                                    <!--                                        </tr>-->
+                                    <!--                                    </t>-->
                                     <t t-if="doc.partner_id.phone">
                                         <tr>
                                             <td style="background-color:#fff">
