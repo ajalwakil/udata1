@@ -398,17 +398,28 @@
                         <div class="oe_structure"/>
                         <br/>
 
-                        <p t-if="doc.sale_terms_and_conditions" name="comment"
-                           style="width:49%;display: inline-block !important;font-size:12px">
-                            <span t-field="doc.sale_terms_and_conditions"/>
-                        </p>
+                        <div style="width:100%;page-break-before:always;">
+                            <div style="width:50%;float:left;padding-right:5px">
+                                <t t-if="doc.sale_terms_and_conditions">
+                                    <span t-field="doc.sale_terms_and_conditions"/>
+                                </t>
+                                <!--                                <p t-if="doc.sale_terms_and_conditions" name="comment"-->
+                                <!--                                   style="width:49%;display: inline-block !important;font-size:12px">-->
+                                <!--                                    <span t-field="doc.sale_terms_and_conditions"/>-->
+                                <!--                                </p>-->
+                            </div>
+                            <div style="width:50%;float:left;padding-left:5px;text-align:right" dir="rtl">
+                                <t t-if="doc.sale_terms_and_conditions">
+                                    <span t-field="doc.arabic_sale_terms_and_conditions"/>
+                                </t>
+                                <!--                                <p class="pull-right text-right" dir="rtl" t-if="doc.arabic_sale_terms_and_conditions"-->
+                                <!--                                   name="comment"-->
+                                <!--                                   style="width:49%;display: inline-block !important;font-size:12px">-->
+                                <!--                                    <span t-field="doc.arabic_sale_terms_and_conditions"/>-->
 
-                        <p class="pull-right text-right" dir="rtl" t-if="doc.arabic_sale_terms_and_conditions"
-                           name="comment"
-                           style="width:49%;display: inline-block !important;font-size:12px">
-                            <span t-field="doc.arabic_sale_terms_and_conditions"/>
-
-                        </p>
+                                <!--                                </p>-->
+                            </div>
+                        </div>
                         <div style="margin-top:30px">
                             <div class="" style="display: inline-block !important;float:right">
                                 <img style="float:right"
