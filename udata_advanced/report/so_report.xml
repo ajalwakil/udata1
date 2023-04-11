@@ -397,8 +397,9 @@
 
                         <div class="oe_structure"/>
                         <br/>
-
-                        <div style="width:100%;page-break-before:always;">
+                        <br/>
+                        <!--                        <div style="width:100%;page-break-before:always;">-->
+                        <div style="width:100%;">
                             <div style="width:50%;float:left;padding-right:5px">
                                 <t t-if="doc.sale_terms_and_conditions">
                                     <span t-field="doc.sale_terms_and_conditions"/>
