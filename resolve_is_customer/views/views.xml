@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+            <field name="domain">[('is_customer','=', False)]</field>
+        </record>
+        <record id="account.res_partner_action_supplier" model="ir.actions.act_window">
+            <field name="domain">[('is_vendor','=', False)]</field>
+        </record>
+    </data>
+</odoo>
