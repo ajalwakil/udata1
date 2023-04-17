@@ -72,6 +72,10 @@
     <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
          <field name="domain">[("versioned", "=" , False)]</field>
     </record>
+    <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+        <field name="domain">[('is_customer','=', False)]</field>
+    </record>
+
 
 
 
