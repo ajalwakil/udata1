@@ -80,4 +80,7 @@ class SaleOrder(models.Model):
         return res
 
 
+class ResPartnerInherit(models.Model):
+    _inherit = 'res.partner'
 
+    is_customer = fields.Boolean(string="Is Customer")

@@ -11,7 +11,7 @@
     'website': "",
     'category': 'website',
     'version': '14.1.2.0.0',
-    'depends': ['sale_management'],
+    'depends': ['sale_management','account'],
     'data': [
         # 'security/ir.model.access.csv',
         'security/security.xml',
