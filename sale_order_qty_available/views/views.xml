@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="sales_view_order_form_aty_available_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.qty_available.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                    <field name="available_quantity"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
