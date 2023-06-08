@@ -371,7 +371,7 @@
                                 <tbody class="sale_tbody">
                                     <tr t-foreach="doc.sale_order_option_ids" t-as="option">
                                         <td name="td_option_name">
-                                            <span t-field="option.name"/>
+                                            <span t-field="option.product_id.name"/>
                                         </td>
                                         <td t-if="has_option_discount" name="td_option_discount"
                                             groups="product.group_discount_per_so_line">
