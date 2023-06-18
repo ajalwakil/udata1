@@ -6,7 +6,7 @@ from odoo import models, fields, api
 class SaleOrderLineInherit(models.Model):
     _inherit = 'sale.order.line'
 
-    available_quantity = fields.Float('Available Quantity')
+    available_quantity = fields.Float('Available Quantity',readonly=True)
 
     @api.onchange('product_id')
     def _onchange_qty_available_product_id(self):
