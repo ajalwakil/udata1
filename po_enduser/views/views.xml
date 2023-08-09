@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="product_template_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//form/sheet/notebook/page[@name='purchase_delivery_invoice']" position="after">
+                 <page string="End User Information" name="endconsumer_information">
+                            <group>
+                                <group name="endconsumer_info">
+                                    <field name="customer_sale_id"/>
+                                    <field name="domain"/>
+                                </group>
+                                <group>
+                                     <field name="subscription_status"/>
+                                     <field name="period"/>
+                                     <field name="approved_by_id"/>
+                                </group>
+                            </group>
+                        </page>
+              </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

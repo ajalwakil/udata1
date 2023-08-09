@@ -1,0 +1,284 @@
+<odoo>
+    <data>
+        <template id="report_purchaseorder_inherit" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//div[@id='informations']" position="replace">
+                <div id="informations" class="row mt32 mb32">
+                    <div t-if="o.user_id" class="col-3 bm-2">
+                        <strong>Purchase Representative:</strong>
+                        <p t-field="o.user_id" class="m-0"/>
+                    </div>
+                    <div t-if="o.partner_ref" class="col-3 bm-2">
+                        <strong>Your Order Reference:</strong>
+                        <p t-field="o.partner_ref" class="m-0"/>
+                    </div>
+                    <div t-if="o.date_order" class="col-3 bm-2">
+                        <strong>Order Date:</strong>
+                        <p t-field="o.date_order" class="m-0"/>
+                    </div>
+                    <div t-if="o.approved_by_id" class="col-3 bm-2">
+                        <strong>Approved By:</strong>
+                        <p t-field="o.approved_by_id.name" class="m-0"/>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//t[@t-set='address']" position="replace">
+<!--                <style>-->
+<!--                    td{-->
+<!--                    background-color:#fff;-->
+<!--                    }-->
+<!--                </style>-->
+<!--                <t t-set="address">-->
+                <div style="clear:both">
+                <div style="font-size:14px" class="row">
+                    <div class="col-2.5">
+                        <t t-if="o.company_id">
+                                <strong>Shipping address:</strong>
+                                <span>
+                                    <table>
+                                            <tr>
+                                                <td style="background-color:#fff;">
+                                                    <span t-field="o.company_id.name"/>
+                                                    <br/>
+                                                    <span t-field="o.company_id.street"/>
+                                                    <br/>
+                                                    <span t-field="o.company_id.zip"/>
+                                                    <span t-field="o.company_id.city"/>
+                                                     <br/>
+                                                    <span t-field="o.company_id.country_id"/>
+                                                    <br/>
+                                                     <span t-field="o.company_id.phone"/>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                </span>
+                        </t>
+                    </div>
+
+                    <div class="col-5">
+                       <t t-if="o.customer_sale_id">
+                            <strong>Customer Information:</strong>
+                            <span>
+                                <table style="background-color:#fff;">
+                                    <t t-if="o.customer_sale_id.company_type == 'company'">
+                                        <tr>
+                                            <td style="background-color:#fff;width:25%">
+                                                <b>Company:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+
+                                                <span t-field="o.customer_sale_id.name"/>
+
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.customer_sale_id.parent_id">
+                                        <tr>
+                                            <td style="background-color:#fff;width:25%">
+                                                <b>Company:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+
+                                                <span t-field="o.customer_sale_id.parent_id.name"/>
+
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.customer_sale_id.parent_id and o.customer_sale_id.name">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Contact:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="o.customer_sale_id.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.customer_sale_id.company_type == 'person' and not o.customer_sale_id.parent_id">
+                                        <tr>
+                                            <td style="background-color:#fff;width:25%">
+                                                <b>Contact:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="o.customer_sale_id.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.customer_sale_id.mobile">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Mobile:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+
+                                                <span t-field="o.customer_sale_id.mobile"/>
+
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.customer_sale_id.vat">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Tax ID:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="o.customer_sale_id.vat"/>,
+                                            </td>
+                                        </tr>
+                                    </t>
+                                     <t t-if="o.domain">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Domain:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="o.domain"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                     <t t-if="o.subscription_status">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Subscription:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="o.subscription_status"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                     <t t-if="o.period">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>Period:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <span t-field="o.period"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.customer_sale_id">
+                                        <tr>
+                                            <td style="background-color:#fff">
+                                                <b>C.R:</b>
+                                            </td>
+                                            <td style="background-color:#fff">
+                                                <t t-if="o.customer_sale_id.company_type == 'person' and o.customer_sale_id.parent_id">
+                                                    <span t-field="o.customer_sale_id.parent_id.commercial_register"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-field="o.customer_sale_id.commercial_register"></span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </span>
+                        </t>
+                    </div>
+                    <div class="col-4.5">
+                         <strong>Vendor Information:</strong>
+                        <span>
+                            <table style="background-color:#fff;">
+                                <t t-if="o.partner_id.company_type == 'company'">
+                                    <tr>
+                                        <td style="background-color:#fff;width:25%">
+                                            <b>Company:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+
+                                            <span t-field="o.partner_id.name"/>
+
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.partner_id.parent_id">
+                                    <tr>
+                                        <td style="background-color:#fff;width:25%">
+                                            <b>Company:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+
+                                            <span t-field="o.partner_id.parent_id.name"/>
+
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.partner_id.parent_id and o.partner_id.name">
+                                    <tr>
+                                        <td style="background-color:#fff">
+                                            <b>Contact:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+                                            <span t-field="o.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.partner_id.company_type == 'person' and not o.partner_id.parent_id">
+                                    <tr>
+                                        <td style="background-color:#fff;width:25%">
+                                            <b>Contact:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+                                            <span t-field="o.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.partner_id.phone">
+                                    <tr>
+                                        <td style="background-color:#fff">
+                                            <b>Phone:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+
+                                            <span t-field="o.partner_id.phone"/>
+
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.partner_id.mobile">
+                                    <tr>
+                                        <td style="background-color:#fff">
+                                            <b>Mobile:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+
+                                            <span t-field="o.partner_id.mobile"/>
+
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.partner_id.email">
+                                    <tr>
+                                        <td style="background-color:#fff">
+                                            <b>Email:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+                                            <span t-field="o.partner_id.email"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="o.partner_id.vat">
+                                    <tr>
+                                        <td style="background-color:#fff">
+                                            <b>Tax ID:</b>
+                                        </td>
+                                        <td style="background-color:#fff">
+                                            <span t-field="o.partner_id.vat"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+
+
+                            </table>
+                        </span>
+                    </div>
+                </div>
+                </div>
+                <br/>
+
+<!--                </t>-->
+            </xpath>
+
+        </template>
+    </data>
+</odoo>
