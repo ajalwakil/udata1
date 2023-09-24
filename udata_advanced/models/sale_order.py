@@ -85,5 +85,8 @@ class SaleOrder(models.Model):
             order.versioned = False
         return res
 
-
-
+    @api.onchange('partner_id')
+    def _onchange_partner(self):
+        self.Customer_hide = False
+        if self.partner_id.name == 'General Cash Customer':
+            self.Customer_hide = True
