@@ -10,37 +10,46 @@
          </div>
          <t t-if="object.state in ('draft', 'sent')">
             Your Quotation *<t t-out="object.name or ''"></t>* with amount *<t t-out="format_amount(object.amount_total, object.currency_id)"></t>* is ready.
-            <div>
-                Your quotation date and time is "<t t-out="object.date_order"></t>"
-            </div>
+<!--            <div>-->
+<!--                Your quotation date and time is "<t t-out="object.date_order"></t>"-->
+<!--            </div>-->
+                <div>
+                    Below is quick review for our proposal... for more details please visit below URL
+                 </div>
             <div>
                 Quotation details are as follows: <br>
                 <t t-foreach="object" t-as="each">
                     <t t-foreach="each.order_line" t-as="id">
                         *Product: <t t-out="id.product_id.name"></t>* <br>
-                         *Qty: <t t-out="id.product_uom_qty"></t>*<br>
-                         *Price:<t t-out="id.price_subtotal"></t>*<br>
-                    </t>
+                         *Qty: <t t-esc="'%.0f' % id.product_uom_qty"></t>*<br>
+                         *Total Price:<t t-out="format_amount(id.price_subtotal, object.currency_id)"></t>*<br>
+                     <br></t>
+
                 </t>
             </div>
             <div>
                 If you have any questions, please feel free to contact us.
             </div>
+
          </t>
          <t t-else="">
             <div>
                 Your Sale Order Number *<t t-out="object.name or ''"></t>* with amount *<t t-out="format_amount(object.amount_total, object.currency_id)"></t>* is Confirmed.
             </div>
-            <div>
-                Your order date and time is "<t t-out="object.date_order"></t>"
-            </div>
+<!--            <div>-->
+<!--                Your order date and time is "<t t-out="object.date_order"></t>"-->
+<!--            </div>-->
+                 <div>
+                    Below is quick review for our proposal... for more details please visit below URL
+                 </div>
             <div>
                 Your order details are as follows: <br>
                 <t t-foreach="object" t-as="each">
                     <t t-foreach="each.order_line" t-as="id">
                         *Product: <t t-out="id.product_id.name"></t>* <br>
-                         *Qty: <t t-out="id.product_uom_qty"></t>*<br>
-                         *Price:<t t-out="id.price_subtotal"></t>*<br>
+                         *Qty: <t t-esc="'%.0f' % id.product_uom_qty"></t>*<br>
+                         *Total Price:<t t-out="format_amount(id.price_subtotal, object.currency_id)"></t>*<br>
+                    <br>
                     </t>
                 </t>
             </div>
