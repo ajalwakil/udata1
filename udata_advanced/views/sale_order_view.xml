@@ -53,7 +53,7 @@
                 <field name="Customer_company" attrs="{'invisible':[('Customer_hide','=',False)]}"/>
                 <field name="Customer_phone" attrs="{'invisible':[('Customer_hide','=',False)]}"/>
                 <field name="Customer_email" attrs="{'invisible':[('Customer_hide','=',False)]}"/>
-                <field name="client_order_ref"/>
+                <field name="client_order_ref" attrs="{'invisible':[('Customer_hide','=',True)]}"/>
                 <field name="source_id"/>
                 <field name="date_order_check" invisible="1"/>
             </xpath>
