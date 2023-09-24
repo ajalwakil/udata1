@@ -1,0 +1,12 @@
+<odoo>
+    <record model="ir.ui.view" id="whatsapp_demo_sale_link">
+        <field name="name">custom_whatsapp_module_link</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="share_link_field" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

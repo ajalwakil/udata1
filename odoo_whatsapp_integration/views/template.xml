@@ -30,6 +30,9 @@
             <div>
                 If you have any questions, please feel free to contact us.
             </div>
+             <div>
+                <t t-esc="object.share_link_field"></t>
+            </div>
 
          </t>
          <t t-else="">
@@ -55,6 +58,9 @@
             </div>
             <div>
                 If you have any questions, please feel free to contact us.
+            </div>
+             <div>
+                <t t-out="object.share_link_field"></t>
             </div>
          </t>
         ]]>

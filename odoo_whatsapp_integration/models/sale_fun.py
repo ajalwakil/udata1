@@ -6,6 +6,7 @@ from itertools import groupby
 class SaleOrderValidation(models.Model):
     _inherit = 'sale.order'
 
+
     def sale_whatsapp(self):
         record_phone = self.partner_id.mobile
         if not record_phone:
