@@ -18,6 +18,12 @@ class SaleOrder(models.Model):
     date_order_check = fields.Boolean('date order check',compute='_compute_date_order_check')
     product_code = fields.Boolean(string='Print Product Code')
     all_price = fields.Boolean(string='Print Product Price')
+    Customer_hide = fields.Boolean('Customer hide')
+    Customer_name = fields.Char('Customer Name')
+    Customer_company = fields.Char('Customer Company')
+    Customer_phone = fields.Char('Customer Phone')
+    Customer_email = fields.Char('Customer Email')
+
 
     def _compute_date_order_check(self):
         check_date_order = self.env['res.users'].has_group('udata_advanced.group_sale_date_order_access')

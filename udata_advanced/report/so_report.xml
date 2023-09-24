@@ -30,98 +30,149 @@
 
                             <!--                            <div t-field="doc.partner_id" style="line-height: 100%;display: inline-block !important"-->
                             <!--                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone", "mobile", "email"], "phone_icons": True, "no_marker": True}'/>-->
-                            <div style="line-height: 100%;display: inline-block !important">
-                                <table style="background-color:#fff;width:345px;">
-                                    <t t-if="doc.partner_id.company_type == 'company'">
-                                        <tr>
+                            <t t-if="doc.Customer_hide == False">
+                                <div style="line-height: 100%;display: inline-block !important">
+                                    <table style="background-color:#fff;width:345px;">
+                                        <t t-if="doc.partner_id.company_type == 'company'">
+                                            <tr>
+                                                <td style="background-color:#fff;width:25%">
+                                                    <b>Company:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+
+                                                    <span t-field="doc.partner_id.name"/>
+
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.partner_id.parent_id">
+                                            <tr>
+                                                <td style="background-color:#fff;width:25%">
+                                                    <b>Company:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+
+                                                    <span t-field="doc.partner_id.parent_id.name"/>
+
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.partner_id.parent_id and doc.partner_id.name">
+                                            <tr>
+                                                <td style="background-color:#fff">
+                                                    <b>Contact:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+                                                    <span t-field="doc.partner_id.name"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.partner_id.company_type == 'person' and not doc.partner_id.parent_id">
+                                            <tr>
+                                                <td style="background-color:#fff;width:25%">
+                                                    <b>Contact:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+                                                    <span t-field="doc.partner_id.name"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.partner_id.phone">
+                                            <tr>
+                                                <td style="background-color:#fff">
+                                                    <b>Phone:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+
+                                                    <span t-field="doc.partner_id.phone"/>
+
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.partner_id.mobile">
+                                            <tr>
+                                                <td style="background-color:#fff">
+                                                    <b>Mobile:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+
+                                                    <span t-field="doc.partner_id.mobile"/>
+
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.partner_id.email">
+                                            <tr>
+                                                <td style="background-color:#fff">
+                                                    <b>Email:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+                                                    <span t-field="doc.partner_id.email"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.partner_id.vat">
+                                            <tr>
+                                                <td style="background-color:#fff">
+                                                    <b>Tax ID:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+                                                    <span t-field="doc.partner_id.vat"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </t>
+                            <t t-if="doc.Customer_hide == True">
+                                <div style="line-height: 100%;display: inline-block !important">
+                                    <table style="background-color:#fff;width:345px;">
+                                        <tr t-if="doc.Customer_company">
                                             <td style="background-color:#fff;width:25%">
                                                 <b>Company:</b>
                                             </td>
                                             <td style="background-color:#fff">
 
-                                                <span t-field="doc.partner_id.name"/>
+                                                <span t-field="doc.Customer_company"/>
 
                                             </td>
                                         </tr>
-                                    </t>
-                                    <t t-if="doc.partner_id.parent_id">
-                                        <tr>
-                                            <td style="background-color:#fff;width:25%">
-                                                <b>Company:</b>
-                                            </td>
-                                            <td style="background-color:#fff">
+                                        <t t-if="doc.Customer_name">
+                                            <tr>
+                                                <td style="background-color:#fff;width:25%">
+                                                    <b>Contact:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+                                                    <span t-field="doc.Customer_name"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.Customer_phone">
+                                            <tr>
+                                                <td style="background-color:#fff">
+                                                    <b>Phone:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
 
-                                                <span t-field="doc.partner_id.parent_id.name"/>
+                                                    <span t-field="doc.Customer_phone"/>
 
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="doc.partner_id.parent_id and doc.partner_id.name">
-                                        <tr>
-                                            <td style="background-color:#fff">
-                                                <b>Contact:</b>
-                                            </td>
-                                            <td style="background-color:#fff">
-                                                <span t-field="doc.partner_id.name"/>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="doc.partner_id.company_type == 'person' and not doc.partner_id.parent_id">
-                                        <tr>
-                                            <td style="background-color:#fff;width:25%">
-                                                <b>Contact:</b>
-                                            </td>
-                                            <td style="background-color:#fff">
-                                                <span t-field="doc.partner_id.name"/>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="doc.partner_id.phone">
-                                        <tr>
-                                            <td style="background-color:#fff">
-                                                <b>Phone:</b>
-                                            </td>
-                                            <td style="background-color:#fff">
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="doc.Customer_email">
+                                            <tr>
+                                                <td style="background-color:#fff">
+                                                    <b>Email:</b>
+                                                </td>
+                                                <td style="background-color:#fff">
+                                                    <span t-field="doc.Customer_email"/>
+                                                </td>
+                                            </tr>
+                                        </t>
 
-                                                <span t-field="doc.partner_id.phone"/>
-
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="doc.partner_id.mobile">
-                                        <tr>
-                                            <td style="background-color:#fff">
-                                                <b>Mobile:</b>
-                                            </td>
-                                            <td style="background-color:#fff">
-
-                                                <span t-field="doc.partner_id.mobile"/>
-
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="doc.partner_id.email">
-                                        <tr>
-                                            <td style="background-color:#fff">
-                                                <b>Email:</b>
-                                            </td>
-                                            <td style="background-color:#fff">
-                                                <span t-field="doc.partner_id.email"/>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <t t-if="doc.partner_id.vat">
-                                        <tr>
-                                            <td style="background-color:#fff">
-                                                <b>Tax ID:</b>
-                                            </td>
-                                            <td style="background-color:#fff">
-                                                <span t-field="doc.partner_id.vat"/>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                </table>
-                            </div>
+                                    </table>
+                                </div>
+                            </t>
 
                             <!--                            <p t-if="doc.partner_id.vat"><b><t-->
                             <!--                                    t-esc="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:</b>-->
