@@ -12,6 +12,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'data/mail_template_data.xml',
         'views/views.xml',
     ],
 }
