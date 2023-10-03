@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+<!--    <record id="ir_cron_send_payment_reminder" model="ir.cron">-->
+<!--        <field name="name">Send Payment Reminder umair</field>-->
+<!--        <field name="model_id" ref="model_sale_subscription"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">model.send_payment_reminder_email()</field>-->
+<!--        <field name="interval_number">1</field>-->
+<!--        <field name="interval_type">days</field>-->
+<!--        <field name="numbercall">-1</field>-->
+<!--        <field name="doall" eval="True"/>-->
+<!--        <field name="active" eval="True"/>-->
+<!--    </record>-->
+
      <!-- Subscription Is created -->
     <record id="email_subscription_created" model="mail.template">
-        <field name="name">Subscription: Your Subscription Is created</field>
+        <field name="name">Subscription: Your Subscription is Created</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
-        <field name="subject">Your Subscription Is created{{ object.code }}</field>
+        <field name="subject">Your Your Subscription is Created {{ object.code }}</field>
         <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
             }}
         </field>
@@ -66,9 +78,9 @@
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>.
-                                                        <t t-if="ctx.get('error')">
-                                                            Your bank or credit institution gave the following details: <pre t-out="ctx['error'] or ''"></pre>.
-                                                        </t>
+<!--                                                        <t t-if="ctx.get('error')">-->
+<!--                                                            Your bank or credit institution gave the following details: <pre t-out="ctx['error'] or ''"></pre>.-->
+<!--                                                        </t>-->
                                                     </t>
                                                     <t t-else="">
 <!--                                                        We were unable to process a payment for your subscription-->
@@ -175,7 +187,7 @@
     <record id="email_payment_reminder_before_one_month" model="mail.template">
         <field name="name">Subscription: Payment Reminder Before 30 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
-        <field name="subject">Payment reminder for subscription Before 30 Days of Expiry Date{{ object.code }}</field>
+        <field name="subject">Payment Reminder Before 30 Days of Expiry Date {{ object.code }}</field>
         <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
             }}
         </field>
@@ -235,25 +247,24 @@
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
-                                                        <t t-out="ctx.get('currency') or ''">$</t>.
-                                                        <t t-if="ctx.get('error')">
-                                                            Your bank or credit institution gave the following details
-                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.
-                                                        </t>
+                                                        <t t-out="ctx.get('currency') or ''">$</t>.please make the
+                                                        payment as soon as possible to avoided interruption in the
+                                                        services.
+<!--                                                        <t t-if="ctx.get('error')">-->
+<!--                                                            Your bank or credit institution gave the following details-->
+<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
+<!--                                                        </t>-->
                                                     </t>
                                                     <t t-else="">
-                                                        We were unable to process a payment for your subscription
-                                                        if the subscription is expired
+<!--                                                        We were unable to process a payment for your subscription-->
+<!--                                                        if the subscription is expired-->
                                                     </t>
                                                     <br/>
                                                     <br/>
                                                     Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still
                                                     valid but will be
                                                     <strong>suspended</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">05/05/2021
-                                                </t> unless the payment succeeds in the mean time (we will retry once
-                                                    every day).
-                                                    Please double-check that you have sufficient funds.
+                                                    on <t t-out="format_date(ctx.get('date_close')) or ''"></t> unless the payment succeeds in the meantime
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -344,7 +355,7 @@
     <record id="email_payment_reminder_before_15_days" model="mail.template">
         <field name="name">Subscription: Payment Reminder Before 15 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
-        <field name="subject">Payment reminder for subscription Before 15 Days of Expiry Date{{ object.code }}</field>
+        <field name="subject">Payment Reminder Before 15 Days of Expiry Date {{ object.code }}</field>
         <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
             }}
         </field>
@@ -404,25 +415,20 @@
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
-                                                        <t t-out="ctx.get('currency') or ''">$</t>.
-                                                        <t t-if="ctx.get('error')">
-                                                            Your bank or credit institution gave the following details
-                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.
-                                                        </t>
+                                                        <t t-out="ctx.get('currency') or ''">$</t>.please make the payment as soon as possible to avoided interruption in the services.
+
                                                     </t>
                                                     <t t-else="">
-                                                        We were unable to process a payment for your subscription
-                                                        if the subscription is expired
+<!--                                                        We were unable to process a payment for your subscription-->
+<!--                                                        if the subscription is expired-->
                                                     </t>
                                                     <br/>
                                                     <br/>
                                                     Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still
                                                     valid but will be
                                                     <strong>suspended</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">05/05/2021
-                                                </t> unless the payment succeeds in the mean time (we will retry once
-                                                    every day).
-                                                    Please double-check that you have sufficient funds.
+                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">
+                                                </t> unless the payment succeeds in the meantime.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -513,7 +519,7 @@
     <record id="email_payment_reminder_before_3_days" model="mail.template">
         <field name="name">Subscription: Payment Reminder Before 3 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
-        <field name="subject">Payment reminder for subscription Before 3 Days of Expiry Date{{ object.code }}</field>
+        <field name="subject">Payment Reminder Before 3 Days of Expiry Date {{ object.code }}</field>
         <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
             }}
         </field>
@@ -573,25 +579,23 @@
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
-                                                        <t t-out="ctx.get('currency') or ''">$</t>.
-                                                        <t t-if="ctx.get('error')">
-                                                            Your bank or credit institution gave the following details
-                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.
-                                                        </t>
+                                                        <t t-out="ctx.get('currency') or ''">$</t>.please make the payment as soon as possible to avoided interruption in the services.
+<!--                                                        <t t-if="ctx.get('error')">-->
+<!--                                                            Your bank or credit institution gave the following details-->
+<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
+<!--                                                        </t>-->
                                                     </t>
                                                     <t t-else="">
-                                                        We were unable to process a payment for your subscription
-                                                        if the subscription is expired
+<!--                                                        We were unable to process a payment for your subscription-->
+<!--                                                        if the subscription is expired-->
                                                     </t>
                                                     <br/>
                                                     <br/>
                                                     Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still
                                                     valid but will be
                                                     <strong>suspended</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">05/05/2021
-                                                </t> unless the payment succeeds in the mean time (we will retry once
-                                                    every day).
-                                                    Please double-check that you have sufficient funds.
+                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">
+                                                </t> unless the payment succeeds in the meantime.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -680,9 +684,9 @@
 
      <!-- Payment Expired -->
     <record id="email_payment_expired" model="mail.template">
-        <field name="name">Subscription: Payment Expired</field>
+        <field name="name">Subscription: Subscription has Expired</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
-        <field name="subject">Payment Expired{{ object.code }}</field>
+        <field name="subject">Subscription has Expired {{ object.code }}</field>
         <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
             }}
         </field>
@@ -743,23 +747,21 @@
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>.
-                                                        <t t-if="ctx.get('error')">
-                                                            Your bank or credit institution gave the following details
-                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.
-                                                        </t>
+<!--                                                        <t t-if="ctx.get('error')">-->
+<!--                                                            Your bank or credit institution gave the following details-->
+<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
+<!--                                                        </t>-->
                                                     </t>
                                                     <t t-else="">
-                                                        We were unable to process a payment for your subscription
-                                                        because your subscription is expired
+<!--                                                        We were unable to process a payment for your subscription-->
+<!--                                                        because your subscription is expired-->
                                                     </t>
                                                     <br/>
                                                     <br/>
                                                     Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is expired
                                                     <strong>suspended</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">05/05/2021
-                                                </t> unless the payment succeeds in the mean time (we will retry once
-                                                    every day).
-                                                    Please double-check that you have sufficient funds.
+                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">
+                                                </t> please make the payment as soon as possible to avoided interruption in the services.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -850,9 +852,9 @@
     <!-- Your Subscription Is Closed -->
 
      <record id="your_subscription_is_closed" model="mail.template">
-        <field name="name">Subscription: Your Subscription Is closed</field>
+        <field name="name">Subscription: Your Subscription is Closed</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
-        <field name="subject">Your Subscription Is Closed{{ object.code }}</field>
+        <field name="subject">Your Subscription is Closed {{ object.code }}</field>
         <field name="email_from">{{ (object.user_id.email or object.company_id.email or user)
             }}
         </field>
@@ -913,23 +915,21 @@
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>.
-                                                        <t t-if="ctx.get('error')">
-                                                            Your bank or credit institution gave the following details
-                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.
-                                                        </t>
+<!--                                                        <t t-if="ctx.get('error')">-->
+<!--                                                            Your bank or credit institution gave the following details-->
+<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
+<!--                                                        </t>-->
                                                     </t>
                                                     <t t-else="">
-                                                        We were unable to process a payment for your subscription
-                                                        because we have no payment method recorded for you and Your Subscription Is Closed.
+<!--                                                        We were unable to process a payment for your subscription-->
+<!--                                                        because we have no payment method recorded for you and Your Subscription Is Closed.-->
                                                     </t>
                                                     <br/>
                                                     <br/>
                                                     Your subscription <t t-out="ctx.get('code') or ''">CODE</t>
                                                     <strong>Closed</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">05/05/2021
-                                                </t> unless the payment succeeds in the mean time (we will retry once
-                                                    every day).
-                                                    Please double-check that you have sufficient funds.
+                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">
+                                                </t> due to non-renew the subscription by paying the required amount.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -1014,4 +1014,9 @@
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
     </record>
+
+
+
+
+
 </odoo>
