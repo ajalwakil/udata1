@@ -188,8 +188,7 @@
         <field name="name">Subscription: Payment Reminder Before 30 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 30 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
-            }}
+        <field name="email_from">subscription@udata.com.sa
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -358,8 +357,7 @@
         <field name="name">Subscription: Payment Reminder Before 15 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 15 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
-            }}
+        <field name="email_from">subscription@udata.com.sa
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -524,8 +522,7 @@
         <field name="name">Subscription: Payment Reminder Before 3 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 3 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
-            }}
+        <field name="email_from">subscription@udata.com.sa
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -693,8 +690,7 @@
         <field name="name">Subscription: Subscription has Expired</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Subscription has Expired {{ object.code }}</field>
-        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
-            }}
+        <field name="email_from">subscription@udata.com.sa
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -863,8 +859,7 @@
         <field name="name">Subscription: Your Subscription is Closed</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Your Subscription is Closed {{ object.code }}</field>
-        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user)
-            }}
+        <field name="email_from">subscription@udata.com.sa
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
          <field name="email_cc">sales@udata.com.sa</field>
