@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!--    <record id="ir_cron_send_payment_reminder" model="ir.cron">-->
-<!--        <field name="name">Send Payment Reminder umair</field>-->
-<!--        <field name="model_id" ref="model_sale_subscription"/>-->
-<!--        <field name="state">code</field>-->
-<!--        <field name="code">model.send_payment_reminder_email()</field>-->
-<!--        <field name="interval_number">1</field>-->
-<!--        <field name="interval_type">days</field>-->
-<!--        <field name="numbercall">-1</field>-->
-<!--        <field name="doall" eval="True"/>-->
-<!--        <field name="active" eval="True"/>-->
-<!--    </record>-->
+    <record id="ir_cron_send_payment_reminder" model="ir.cron">
+        <field name="name">Send custom Payment Reminder</field>
+        <field name="model_id" ref="model_sale_subscription"/>
+        <field name="state">code</field>
+        <field name="code">model.send_payment_reminder_email()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
 
      <!-- Subscription Is created -->
     <record id="email_subscription_created" model="mail.template">
@@ -20,6 +20,8 @@
         <field name="subject">Your Your Subscription is Created {{ object.code }}</field>
         <field name="email_from">subscription@udata.com.sa</field>
         <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="email_cc">sales@udata.com.sa</field>
+        <field name="reply_to">sales@udata.com.sa</field>
         <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
@@ -186,8 +188,12 @@
         <field name="name">Subscription: Payment Reminder Before 30 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 30 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa</field>
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
+        </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="email_cc">sales@udata.com.sa</field>
+        <field name="reply_to">sales@udata.com.sa</field>
         <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
@@ -352,8 +358,12 @@
         <field name="name">Subscription: Payment Reminder Before 15 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 15 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa</field>
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
+        </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="email_cc">sales@udata.com.sa</field>
+        <field name="reply_to">sales@udata.com.sa</field>
         <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
@@ -514,8 +524,12 @@
         <field name="name">Subscription: Payment Reminder Before 3 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 3 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa</field>
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
+        </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="email_cc">sales@udata.com.sa</field>
+        <field name="reply_to">sales@udata.com.sa</field>
         <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
@@ -679,8 +693,12 @@
         <field name="name">Subscription: Subscription has Expired</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Subscription has Expired {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa</field>
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
+        </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="email_cc">sales@udata.com.sa</field>
+        <field name="reply_to">sales@udata.com.sa</field>
         <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
@@ -845,8 +863,12 @@
         <field name="name">Subscription: Your Subscription is Closed</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Your Subscription is Closed {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa</field>
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user)
+            }}
+        </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
+         <field name="email_cc">sales@udata.com.sa</field>
+         <field name="reply_to">sales@udata.com.sa</field>
         <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">

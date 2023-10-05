@@ -24,15 +24,15 @@ class SaleSubscriptionInherit(models.Model):
         if self.date:
             self.trigger_date_3 = self.date + relativedelta(days=-3)
 
-    # def send_payment_reminder_email(self):
-    #     # Calculate the current date
-    #     today = fields.Date.today()
-    #
-    #     # Find subscriptions with an expired subscription date
-    #     expired_subscriptions = self.search([('date', '=', today)])
-    #
-    #     for subscription in expired_subscriptions:
-    #         # Send a payment reminder email to the subscriber
-    #         template = self.env.ref('subscription_customizations.email_payment_expired')
-    #         if template:
-    #             template.send_mail(subscription.id, force_send=True)
+    def send_payment_reminder_email(self):
+        # Calculate the current date
+        today = fields.Date.today()
+
+        # Find subscriptions with an expired subscription date
+        expired_subscriptions = self.search([('date', '=', today),('stage_id.category', '=', 'progress')])
+        if expired_subscriptions:
+            for subscription in expired_subscriptions:
+                # Send a payment reminder email to the subscriber
+                template = self.env.ref('subscription_customizations.email_payment_expired')
+                if template:
+                    template.send_mail(subscription.id, force_send=True)
