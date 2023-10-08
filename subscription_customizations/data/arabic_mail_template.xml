@@ -55,31 +55,8 @@
 
                                             <br/>
                                             <br/>
-                                            <!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
-                                            <!--                                                        your subscription is created-->
-                                            <!--                                                        <t t-out="ctx['payment_token'] or ''">TOKEN</t>-->
-                                            <!--                                                        for-->
-                                            <!--                                                        <t t-out="ctx['total_amount'] or ''">10</t>-->
-                                            <!--                                                        <t t-out="ctx.get('currency') or ''">$</t>.-->
-                                            <!--                                                        <t t-if="ctx.get('error')">-->
-                                            <!--                                                            Your bank or credit institution gave the following details: <pre t-out="ctx['error'] or ''"></pre>.-->
-                                            <!--                                                        </t>-->
-                                            <!--                                                    </t>-->
-                                            <!--                                                    <t t-else="">-->
-                                            <!--&lt;!&ndash;                                                        We were unable to process a payment for your subscription&ndash;&gt;-->
-                                            <!--&lt;!&ndash;                                                        if the subscription is expired&ndash;&gt;-->
-                                            <!--                                                    </t>-->
                                             <br/>
                                             <br/>
-                                            <!--                                                    Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still-->
-                                            <!--                                                    valid but will be-->
-                                            <!--                                                    <strong>suspended</strong>-->
-                                            <!--                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">05/05/2021-->
-                                            <!--                                                </t> unless the payment succeeds in the mean time (we will retry once-->
-                                            <!--                                                    every day).-->
-                                            <!--                                                    Please double-check that you have sufficient funds.-->
-                                            <!--                                                    <br/>-->
-                                            <!--                                                    <br/>-->
                                             <div dir="rtl">
                                                 نشكركم على ثقتكم و تعاملكم مع UDATA، تم تفعيل اشتراكم لدينا و بإمكانكم
                                                 الاستفادة من جميع مميزات الاشتراك .
@@ -162,7 +139,7 @@
         </tr>
     </table>
 
-     <!-- Payment Reminder Before 30 Days of Expiry Date -->
+    <!-- Payment Reminder Before 30 Days of Expiry Date -->
     <table border="0" cellpadding="0" cellspacing="0"
            style="padding-top: 16px; background-color: #F1F1F1;  font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
         <style>@font-face {
@@ -209,40 +186,40 @@
                                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                     <tr>
                                         <td valign="top" style="font-size: 13px;">
-                                           <div dir="rtl"> <span><t t-out="object.partner_id.name or ''"></t></span><span style="float:right">مرحبًا</span></div>
+                                            <div dir="rtl">
+                                                <span>
+                                                    <t t-out="object.partner_id.name or ''"></t>
+                                                </span>
+                                                <span style="float:right">مرحبًا</span>
+                                            </div>
                                             <br/>
                                             <br/>
+                                            <span>سينتهي اشتراكك خلال 30 يومًا القادمة بتكلفة</span>
                                             <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
                                                 <div dir="rtl">
-                                                    <span>سينتهي اشتراكك خلال 30 يومًا القادمة بتكلفة</span>
                                                     <span>
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>
                                                     </span>
-                                                    <span>
-                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
-                                                        عنكم.
-                                                    </span>
                                                 </div>
-                                                <!--                                                        <t t-if="ctx.get('error')">-->
-                                                <!--                                                            Your bank or credit institution gave the following details-->
-                                                <!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
-                                                <!--                                                        </t>-->
                                             </t>
-                                            <t t-else="">
-                                                <!--                                                        We were unable to process a payment for your subscription-->
-                                                <!--                                                        if the subscription is expired-->
-                                            </t>
+                                            <span>
+                                                . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                عنكم.
+                                            </span>
                                             <br/>
                                             <br/>
-
                                             <div dir="rtl">
-                                               اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ ما لم يتد الدفع قبل ذلك،
+                                                اشتراكك لازال ساريا، وسوف سيتم تعليقه
+                                                <span>
+                                                    <t t-out="object.date or ''"></t>
+                                                </span>
+                                                بتاريخ ما لم يتد الدفع قبل ذلك،
                                             </div>
                                             <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.</div>
                                             <br/>
                                             <br/>
-                                           <div dir="rtl"> شكرا لاختيارك UDATA !</div>
+                                            <div dir="rtl">شكرا لاختيارك UDATA !</div>
                                             <div>
                                                 <t t-if="user.signature">
                                                     <br/>
@@ -368,32 +345,27 @@
                                            <div dir="rtl"> <span><t t-out="object.partner_id.name or ''"></t></span><span style="float:right">مرحبًا</span></div>
                                             <br/>
                                             <br/>
+                                             <span>سينتهي اشتراكك خلال 15 يومًا القادمة بتكلفة</span>
                                             <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
                                                 <div dir="rtl">
-                                                    <span>سينتهي اشتراكك خلال 15 يومًا القادمة بتكلفة</span>
                                                     <span>
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>
                                                     </span>
-                                                    <span>
-                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
-                                                        عنكم.
-                                                    </span>
                                                 </div>
-                                                <!--                                                        <t t-if="ctx.get('error')">-->
-                                                <!--                                                            Your bank or credit institution gave the following details-->
-                                                <!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
-                                                <!--                                                        </t>-->
                                             </t>
-                                            <t t-else="">
-                                                <!--                                                        We were unable to process a payment for your subscription-->
-                                                <!--                                                        if the subscription is expired-->
-                                            </t>
+                                            <span>
+                                                . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                عنكم.
+                                            </span>
                                             <br/>
                                             <br/>
-
                                             <div dir="rtl">
-                                               اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ ما لم يتد الدفع قبل ذلك،
+                                                اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ
+                                                <span>
+                                                    <t t-out="object.date or ''"></t>
+                                                </span>
+                                                ما لم يتد الدفع قبل ذلك،
                                             </div>
                                             <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.</div>
                                             <br/>
@@ -403,7 +375,7 @@
                                                 <t t-if="user.signature">
                                                     <br/>
                                                     <br/>
-                                                    <t t-out="user.signature or ''">--<br/>Mitchell Admin
+                                                    <t t-out="user.signature or ''">--<br/>
                                                     </t>
                                                 </t>
                                             </div>
@@ -495,7 +467,7 @@
                                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                     <tr>
                                         <td valign="middle">
-                                           تذكير بالدفع .. باقي 3 يومًا من تاريخ انتهاء الاشتراك
+                                            تذكير بالدفع .. باقي 3 يومًا من تاريخ انتهاء الاشتراك
                                         </td>
                                     </tr>
                                     <tr>
@@ -521,40 +493,42 @@
                                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                     <tr>
                                         <td valign="top" style="font-size: 13px;">
-                                           <div dir="rtl"> <span><t t-out="object.partner_id.name or ''"></t></span><span style="float:right">مرحبًا</span></div>
+                                            <div dir="rtl">
+                                                <span>
+                                                    <t t-out="object.partner_id.name or ''"></t>
+                                                </span>
+                                                <span style="float:right">مرحبًا</span>
+                                            </div>
                                             <br/>
                                             <br/>
+                                            <span>سينتهي اشتراكك خلال 3 يومًا القادمة بتكلفة</span>
                                             <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
                                                 <div dir="rtl">
-                                                    <span>سينتهي اشتراكك خلال 3 يومًا القادمة بتكلفة </span>
+
                                                     <span>
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>
                                                     </span>
-                                                    <span>
-                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
-                                                        عنكم.
-                                                    </span>
                                                 </div>
-                                                <!--                                                        <t t-if="ctx.get('error')">-->
-                                                <!--                                                            Your bank or credit institution gave the following details-->
-                                                <!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
-                                                <!--                                                        </t>-->
                                             </t>
-                                            <t t-else="">
-                                                <!--                                                        We were unable to process a payment for your subscription-->
-                                                <!--                                                        if the subscription is expired-->
-                                            </t>
+                                            <span>
+                                                . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                عنكم.
+                                            </span>
                                             <br/>
                                             <br/>
 
                                             <div dir="rtl">
-                                               اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ ما لم يتد الدفع قبل ذلك،
+                                                اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ
+                                                <span>
+                                                    <t t-out="object.date or ''"></t>
+                                                </span>
+                                                ما لم يتد الدفع قبل ذلك،
                                             </div>
                                             <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.</div>
                                             <br/>
                                             <br/>
-                                           <div dir="rtl"> شكرا لاختيارك UDATA !</div>
+                                            <div dir="rtl">شكرا لاختيارك UDATA !</div>
                                             <div>
                                                 <t t-if="user.signature">
                                                     <br/>
@@ -683,7 +657,11 @@
                                             <br/>
 
                                             <div dir="rtl">
-                                               انتهت صلاحية اشتراكك بتاريخ ، يرجى إجراء الدفع في أقرب وقت ممكن لتجنب انقطاع الخدمة عنكم .
+                                                انتهت صلاحية اشتراكك بتاريخ
+                                                <span>
+                                                    <t t-out="object.date or ''"></t>
+                                                </span>
+                                                ، يرجى إجراء الدفع في أقرب وقت ممكن لتجنب انقطاع الخدمة عنكم .
                                             </div>
                                             <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.</div>
                                             <br/>
@@ -817,7 +795,11 @@
                                             <br/>
 
                                             <div dir="rtl">
-                                               اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ ما لم يتد الدفع قبل ذلك،
+                                                اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ
+                                                <span>
+                                                    <t t-out="object.date or ''"></t>
+                                                </span>
+                                                ما لم يتد الدفع قبل ذلك،
                                             </div>
                                             <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.</div>
                                             <br/>

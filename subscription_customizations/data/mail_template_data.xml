@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="ir_cron_send_payment_reminder" model="ir.cron">
         <field name="name">Send custom Payment Reminder</field>
         <field name="model_id" ref="model_sale_subscription"/>
@@ -13,11 +12,11 @@
         <field name="active" eval="True"/>
     </record>
 
-     <!-- Subscription Is created -->
+    <!-- Subscription Is created -->
     <record id="email_subscription_created" model="mail.template">
         <field name="name">Subscription: Your Subscription is Created</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
-        <field name="subject">Your Your Subscription is Created {{ object.code }}</field>
+        <field name="subject">Your Subscription is Created {{ object.code }}</field>
         <field name="email_from">subscription@udata.com.sa</field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -42,7 +41,7 @@
                                                     <span style="font-size: 10px;">Your Subscription</span>
                                                     <br/>
                                                     <span style="font-size: 20px; font-weight: bold;"
-                                                          t-out="object.name or ''">Office Cleaning Service
+                                                          t-out="object.name or ''">
                                                     </span>
                                                 </td>
                                             </tr>
@@ -69,38 +68,163 @@
                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                             <tr>
                                                 <td valign="top" style="font-size: 13px;">
-                                                    Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
+                                                    Hello <t t-out="object.partner_id.name or ''"></t>,
                                                     <br/>
                                                     <br/>
+                                                    your subscription is created
+                                                    <t t-out="object.name or ''"></t>
                                                     <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
-                                                        your subscription is created
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>.
-<!--                                                        <t t-if="ctx.get('error')">-->
-<!--                                                            Your bank or credit institution gave the following details: <pre t-out="ctx['error'] or ''"></pre>.-->
-<!--                                                        </t>-->
                                                     </t>
-                                                    <t t-else="">
-<!--                                                        We were unable to process a payment for your subscription-->
-<!--                                                        if the subscription is expired-->
-                                                    </t>
+
                                                     <br/>
                                                     <br/>
-<!--                                                    Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still-->
-<!--                                                    valid but will be-->
-<!--                                                    <strong>suspended</strong>-->
-<!--                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">05/05/2021-->
-<!--                                                </t> unless the payment succeeds in the mean time (we will retry once-->
-<!--                                                    every day).-->
-<!--                                                    Please double-check that you have sufficient funds.-->
-<!--                                                    <br/>-->
-<!--                                                    <br/>-->
                                                     If you have any questions, do not hesitate to contact us.
                                                     <br/>
                                                     <br/>
                                                     Thank you for choosing <t t-out="company.name or ''">YourCompany</t>!
+                                                    <div>
+                                                        <t t-if="user.signature">
+                                                            <br/>
+                                                            <br/>
+                                                            <t t-out="user.signature or ''">--<br/>Mitchell Admin
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="company.name or ''">YourCompany</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-if="company.phone">
+                                                        <t t-out="company.phone or ''">+1 650-123-4567</t>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.email">
+                                                        <a t-attf-href="'mailto:%s' % {{ company.email }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.email or ''">info@yourcompany.com
+                                                        </a>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.website">
+                                                        <a t-attf-href="'%s' % {{ company.website }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.website or ''">http://www.example.com
+                                                        </a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by
+                                    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail"
+                                       style="color: #875A7B;">Odoo
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <table border="0" cellpadding="0" cellspacing="0"
+                   style="padding-top: 16px; background-color: #F1F1F1; font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
+                <style>@font-face {
+                    font-family: 'Tajawal-Regular';
+                    src: local('Tajawal'), local('Tajawal'),
+                    url(/subscription_customizations/static/src/fonts/Tajawal-Regular.ttf) format('opentype');
+                    }
+                </style>
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <!--                                                    <t t-set="company" t-value="object.company_id or object.user_id.company_id or user.company_id"/>-->
+                                                    <!--                                                    <span style="font-size: 10px;">Your Subscription</span>-->
+                                                    <!--                                                    <br/>-->
+                                                    <!--                                                    <span style="font-size: 20px; font-weight: bold;" t-out="object.name or ''">Office Cleaning Service-->
+                                                    <!--                                                    </span>-->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ company.id }}"
+                                                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                         t-att-alt="company.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div dir="rtl">تفعيل الحساب !</div>
+
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">
+                                                        نشكركم على ثقتكم و تعاملكم مع UDATA، تم تفعيل اشتراكم لدينا و
+                                                        بإمكانكم
+                                                        الاستفادة من جميع مميزات الاشتراك .
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">نشكركم على اختياركم UDATA</div>
                                                     <div>
                                                         <t t-if="user.signature">
                                                             <br/>
@@ -181,14 +305,13 @@
     </record>
 
 
-
-
     <!-- Payment Reminder Before 30 Days of Expiry Date -->
     <record id="email_payment_reminder_before_one_month" model="mail.template">
         <field name="name">Subscription: Payment Reminder Before 30 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 30 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -213,7 +336,7 @@
                                                     <span style="font-size: 10px;">Your Subscription</span>
                                                     <br/>
                                                     <span style="font-size: 20px; font-weight: bold;"
-                                                          t-out="object.name or ''">Office Cleaning Service
+                                                          t-out="object.name or ''">
                                                     </span>
                                                 </td>
                                             </tr>
@@ -243,29 +366,24 @@
                                                     Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
                                                     <br/>
                                                     <br/>
+                                                    your subscription will expire in 30 days
                                                     <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
-                                                        your subscription will expire in 30 days
+
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
-                                                        <t t-out="ctx.get('currency') or ''">$</t>.please make the
-                                                        payment as soon as possible to avoided interruption in the
-                                                        services.
-<!--                                                        <t t-if="ctx.get('error')">-->
-<!--                                                            Your bank or credit institution gave the following details-->
-<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
-<!--                                                        </t>-->
+                                                        <t t-out="ctx.get('currency') or ''">$</t>
                                                     </t>
-                                                    <t t-else="">
-<!--                                                        We were unable to process a payment for your subscription-->
-<!--                                                        if the subscription is expired-->
-                                                    </t>
+                                                    .please make the
+                                                    payment as soon as possible to avoided interruption in the
+                                                    services.
                                                     <br/>
                                                     <br/>
-                                                    Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still
+                                                    Your subscription <t t-out="object.name or ''"></t> is still
                                                     valid but will be
                                                     <strong>suspended</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''"></t> unless the payment succeeds in the meantime
+                                                    on <t t-out="object.date or ''"></t> unless the payment succeeds in
+                                                    the meantime
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -346,6 +464,164 @@
                     </td>
                 </tr>
             </table>
+
+
+            <table border="0" cellpadding="0" cellspacing="0"
+                   style="padding-top: 16px; background-color: #F1F1F1;  font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
+                <style>@font-face {
+                    font-family: 'Tajawal-Regular';
+                    src: local('Tajawal'), local('Tajawal'),
+                    url(/subscription_customizations/static/src/fonts/Tajawal-Regular.ttf) format('opentype');
+                    }
+                </style>
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table dir="rtl" border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    تذكير بالدفع .. باقي 30 يومًا من تاريخ انتهاء الاشتراك
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ company.id }}"
+                                                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                         t-att-alt="company.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div dir="rtl">
+                                                        <span>
+                                                            <t t-out="object.partner_id.name or ''"></t>
+                                                        </span>
+                                                        <span style="float:right">مرحبًا</span>
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <span>سينتهي اشتراكك خلال 30 يومًا القادمة بتكلفة</span>
+                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
+                                                        <div dir="rtl">
+                                                            <span>
+                                                                <t t-out="ctx['total_amount'] or ''">10</t>
+                                                                <t t-out="ctx.get('currency') or ''">$</t>
+                                                            </span>
+                                                        </div>
+                                                    </t>
+                                                    <span>
+                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                        عنكم.
+                                                    </span>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">
+                                                        اشتراكك لازال ساريا، وسوف سيتم تعليقه
+                                                        <span>
+                                                            <t t-out="object.date or ''"></t>
+                                                        </span>
+                                                        بتاريخ ما لم يتد الدفع قبل ذلك،
+                                                    </div>
+                                                    <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">شكرا لاختيارك UDATA !</div>
+                                                    <div>
+                                                        <t t-if="user.signature">
+                                                            <br/>
+                                                            <br/>
+                                                            <t t-out="user.signature or ''">--<br/>Mitchell Admin
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="company.name or ''">YourCompany</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-if="company.phone">
+                                                        <t t-out="company.phone or ''">+1 650-123-4567</t>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.email">
+                                                        <a t-attf-href="'mailto:%s' % {{ company.email }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.email or ''">info@yourcompany.com
+                                                        </a>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.website">
+                                                        <a t-attf-href="'%s' % {{ company.website }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.website or ''">http://www.example.com
+                                                        </a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by
+                                    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail"
+                                       style="color: #875A7B;">Odoo
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
         </field>
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
@@ -357,7 +633,8 @@
         <field name="name">Subscription: Payment Reminder Before 15 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 15 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -382,7 +659,7 @@
                                                     <span style="font-size: 10px;">Your Subscription</span>
                                                     <br/>
                                                     <span style="font-size: 20px; font-weight: bold;"
-                                                          t-out="object.name or ''">Office Cleaning Service
+                                                          t-out="object.name or ''">
                                                     </span>
                                                 </td>
                                             </tr>
@@ -409,28 +686,28 @@
                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                             <tr>
                                                 <td valign="top" style="font-size: 13px;">
-                                                    Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
+                                                    Hello <t t-out="object.partner_id.name or ''"></t>,
                                                     <br/>
                                                     <br/>
+                                                    your subscription will expire in 15 days
                                                     <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
-                                                        your subscription will expire in 15 days
+
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
-                                                        <t t-out="ctx.get('currency') or ''">$</t>.please make the payment as soon as possible to avoided interruption in the services.
+                                                        <t t-out="ctx.get('currency') or ''">$</t>
 
                                                     </t>
-                                                    <t t-else="">
-<!--                                                        We were unable to process a payment for your subscription-->
-<!--                                                        if the subscription is expired-->
-                                                    </t>
+                                                    .please make the payment as soon as possible to avoided interruption
+                                                    in the services.
                                                     <br/>
                                                     <br/>
-                                                    Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still
+                                                    Your subscription <t t-out="object.name or ''"></t> is still
                                                     valid but will be
                                                     <strong>suspended</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">
-                                                </t> unless the payment succeeds in the meantime.
+                                                    on
+                                                    <t t-out="object.date or ''"></t>
+                                                    unless the payment succeeds in the meantime.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -511,18 +788,178 @@
                     </td>
                 </tr>
             </table>
+
+            <table border="0" cellpadding="0" cellspacing="0"
+                   style="padding-top: 16px; background-color: #F1F1F1;  font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
+                <style>@font-face {
+                    font-family: 'Tajawal-Regular';
+                    src: local('Tajawal'), local('Tajawal'),
+                    url(/subscription_customizations/static/src/fonts/Tajawal-Regular.ttf) format('opentype');
+                    }
+                </style>
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table dir="rtl" border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    تذكير بالدفع .. باقي 15 يومًا من تاريخ انتهاء الاشتراك
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ company.id }}"
+                                                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                         t-att-alt="company.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div dir="rtl">
+                                                        <span>
+                                                            <t t-out="object.partner_id.name or ''"></t>
+                                                        </span>
+                                                        <span style="float:right">مرحبًا</span>
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <span>سينتهي اشتراكك خلال 15 يومًا القادمة بتكلفة</span>
+                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
+                                                        <div dir="rtl">
+                                                            <span>
+                                                                <t t-out="ctx['total_amount'] or ''">10</t>
+                                                                <t t-out="ctx.get('currency') or ''">$</t>
+                                                            </span>
+                                                        </div>
+                                                    </t>
+                                                    <span>
+                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                        عنكم.
+                                                    </span>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">
+                                                        اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ
+                                                        <span>
+                                                            <t t-out="object.date or ''"></t>
+                                                        </span>
+                                                        ما لم يتد الدفع قبل ذلك،
+                                                    </div>
+                                                    <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">شكرا لاختيارك UDATA !</div>
+                                                    <div>
+                                                        <t t-if="user.signature">
+                                                            <br/>
+                                                            <br/>
+                                                            <t t-out="user.signature or ''">--
+                                                                <br/>
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="company.name or ''">YourCompany</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-if="company.phone">
+                                                        <t t-out="company.phone or ''">+1 650-123-4567</t>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.email">
+                                                        <a t-attf-href="'mailto:%s' % {{ company.email }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.email or ''">info@yourcompany.com
+                                                        </a>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.website">
+                                                        <a t-attf-href="'%s' % {{ company.website }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.website or ''">http://www.example.com
+                                                        </a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by
+                                    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail"
+                                       style="color: #875A7B;">Odoo
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
         </field>
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
     </record>
 
 
-        <!-- Payment Reminder Before 3 Days of Expiry Date -->
+    <!-- Payment Reminder Before 3 Days of Expiry Date -->
     <record id="email_payment_reminder_before_3_days" model="mail.template">
         <field name="name">Subscription: Payment Reminder Before 3 Days of Expiry Date</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Payment Reminder Before 3 Days of Expiry Date {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -547,7 +984,7 @@
                                                     <span style="font-size: 10px;">Your Subscription</span>
                                                     <br/>
                                                     <span style="font-size: 20px; font-weight: bold;"
-                                                          t-out="object.name or ''">Office Cleaning Service
+                                                          t-out="object.name or ''">
                                                     </span>
                                                 </td>
                                             </tr>
@@ -574,31 +1011,25 @@
                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                             <tr>
                                                 <td valign="top" style="font-size: 13px;">
-                                                    Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
+                                                    Hello <t t-out="object.partner_id.name or ''"></t>,
                                                     <br/>
                                                     <br/>
+                                                    your subscription will expire in 3 days
                                                     <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
-                                                        your subscription will expire in 3 days
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
-                                                        <t t-out="ctx.get('currency') or ''">$</t>.please make the payment as soon as possible to avoided interruption in the services.
-<!--                                                        <t t-if="ctx.get('error')">-->
-<!--                                                            Your bank or credit institution gave the following details-->
-<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
-<!--                                                        </t>-->
+                                                        <t t-out="ctx.get('currency') or ''">$</t>
                                                     </t>
-                                                    <t t-else="">
-<!--                                                        We were unable to process a payment for your subscription-->
-<!--                                                        if the subscription is expired-->
-                                                    </t>
+                                                    .please make the payment as soon as possible to avoided interruption
+                                                    in the services.
                                                     <br/>
                                                     <br/>
-                                                    Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is still
+                                                    Your subscription "<t t-out="object.name or ''"></t>" is still
                                                     valid but will be
                                                     <strong>suspended</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">
-                                                </t> unless the payment succeeds in the meantime.
+                                                    on "<t t-out="object.date or ''"></t>" unless the payment succeeds
+                                                    in the meantime.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -679,18 +1110,179 @@
                     </td>
                 </tr>
             </table>
+
+            <table border="0" cellpadding="0" cellspacing="0"
+                   style="padding-top: 16px; background-color: #F1F1F1; font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
+                <style>@font-face {
+                    font-family: 'Tajawal-Regular';
+                    src: local('Tajawal'), local('Tajawal'),
+                    url(/subscription_customizations/static/src/fonts/Tajawal-Regular.ttf) format('opentype');
+                    }
+                </style>
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table dir="rtl" border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    تذكير بالدفع .. باقي 3 يومًا من تاريخ انتهاء الاشتراك
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ company.id }}"
+                                                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                         t-att-alt="company.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div dir="rtl">
+                                                        <span>
+                                                            <t t-out="object.partner_id.name or ''"></t>
+                                                        </span>
+                                                        <span style="float:right">مرحبًا</span>
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <span>سينتهي اشتراكك خلال 3 يومًا القادمة بتكلفة</span>
+                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
+                                                        <div dir="rtl">
+
+                                                            <span>
+                                                                <t t-out="ctx['total_amount'] or ''">10</t>
+                                                                <t t-out="ctx.get('currency') or ''">$</t>
+                                                            </span>
+                                                        </div>
+                                                    </t>
+                                                    <span>
+                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                        عنكم.
+                                                    </span>
+                                                    <br/>
+                                                    <br/>
+
+                                                    <div dir="rtl">
+                                                        اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ
+                                                        <span>
+                                                            <t t-out="object.date or ''"></t>
+                                                        </span>
+                                                        ما لم يتد الدفع قبل ذلك،
+                                                    </div>
+                                                    <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">شكرا لاختيارك UDATA !</div>
+                                                    <div>
+                                                        <t t-if="user.signature">
+                                                            <br/>
+                                                            <br/>
+                                                            <t t-out="user.signature or ''">--<br/>Mitchell Admin
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="company.name or ''">YourCompany</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-if="company.phone">
+                                                        <t t-out="company.phone or ''">+1 650-123-4567</t>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.email">
+                                                        <a t-attf-href="'mailto:%s' % {{ company.email }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.email or ''">info@yourcompany.com
+                                                        </a>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.website">
+                                                        <a t-attf-href="'%s' % {{ company.website }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.website or ''">http://www.example.com
+                                                        </a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by
+                                    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail"
+                                       style="color: #875A7B;">Odoo
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
         </field>
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
     </record>
 
 
-     <!-- Payment Expired -->
+    <!-- Payment Expired -->
     <record id="email_payment_expired" model="mail.template">
         <field name="name">Subscription: Subscription has Expired</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Subscription has Expired {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user.email)
+            }}
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
         <field name="email_cc">sales@udata.com.sa</field>
@@ -715,7 +1307,7 @@
                                                     <span style="font-size: 10px;">Your Subscription</span>
                                                     <br/>
                                                     <span style="font-size: 20px; font-weight: bold;"
-                                                          t-out="object.name or ''">Office Cleaning Service
+                                                          t-out="object.name or ''">
                                                     </span>
                                                 </td>
                                             </tr>
@@ -742,30 +1334,23 @@
                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                             <tr>
                                                 <td valign="top" style="font-size: 13px;">
-                                                    Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
+                                                    Hello <t t-out="object.partner_id.name or ''"></t>,
                                                     <br/>
                                                     <br/>
+                                                    your subscription is expired
                                                     <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
-                                                        your subscription is expired
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>.
-<!--                                                        <t t-if="ctx.get('error')">-->
-<!--                                                            Your bank or credit institution gave the following details-->
-<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
-<!--                                                        </t>-->
-                                                    </t>
-                                                    <t t-else="">
-<!--                                                        We were unable to process a payment for your subscription-->
-<!--                                                        because your subscription is expired-->
                                                     </t>
                                                     <br/>
                                                     <br/>
-                                                    Your subscription <t t-out="ctx.get('code') or ''">CODE</t> is expired
+                                                    Your subscription <t t-out="object.name or ''"></t> is expired
                                                     <strong>suspended</strong>
                                                     on <t t-out="format_date(ctx.get('date_close')) or ''">
-                                                </t> please make the payment as soon as possible to avoided interruption in the services.
+                                                </t> please make the payment as soon as possible to avoided interruption
+                                                    in the services.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -846,24 +1431,167 @@
                     </td>
                 </tr>
             </table>
+
+            <table border="0" cellpadding="0" cellspacing="0"
+                   style="padding-top: 16px; background-color: #F1F1F1; font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
+                <style>@font-face {
+                    font-family: 'Tajawal-Regular';
+                    src: local('Tajawal'), local('Tajawal'),
+                    url(/subscription_customizations/static/src/fonts/Tajawal-Regular.ttf) format('opentype');
+                    }
+                </style>
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table dir="rtl" border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    الاشتراك: انتهت مدة الإشتراك
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ company.id }}"
+                                                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                         t-att-alt="company.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div dir="rtl">
+                                                        <span>
+                                                            <t t-out="object.partner_id.name or ''"></t>
+                                                        </span>
+                                                        <span style="float:right">مرحبًا</span>
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+
+                                                    <div dir="rtl">
+                                                        انتهت صلاحية اشتراكك بتاريخ
+                                                        <span>
+                                                            <t t-out="object.date or ''"></t>
+                                                        </span>
+                                                        ، يرجى إجراء الدفع في أقرب وقت ممكن لتجنب انقطاع الخدمة عنكم .
+                                                    </div>
+                                                    <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">شكرا لاختيارك UDATA !</div>
+                                                    <div>
+                                                        <t t-if="user.signature">
+                                                            <br/>
+                                                            <br/>
+                                                            <t t-out="user.signature or ''">--<br/>Mitchell Admin
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="company.name or ''">YourCompany</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-if="company.phone">
+                                                        <t t-out="company.phone or ''">+1 650-123-4567</t>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.email">
+                                                        <a t-attf-href="'mailto:%s' % {{ company.email }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.email or ''">info@yourcompany.com
+                                                        </a>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.website">
+                                                        <a t-attf-href="'%s' % {{ company.website }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.website or ''">http://www.example.com
+                                                        </a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by
+                                    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail"
+                                       style="color: #875A7B;">Odoo
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
         </field>
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
     </record>
 
 
-
     <!-- Your Subscription Is Closed -->
 
-     <record id="your_subscription_is_closed" model="mail.template">
+    <record id="your_subscription_is_closed" model="mail.template">
         <field name="name">Subscription: Your Subscription is Closed</field>
         <field name="model_id" ref="sale_subscription.model_sale_subscription"/>
         <field name="subject">Your Subscription is Closed {{ object.code }}</field>
-        <field name="email_from">subscription@udata.com.sa
+        <field name="email_from">{{ (object.user_id.email or object.company_id.email or user)
+            }}
         </field>
         <field name="email_to">{{ object.partner_id.email }}</field>
-         <field name="email_cc">sales@udata.com.sa</field>
-         <field name="reply_to">sales@udata.com.sa</field>
+        <field name="email_cc">sales@udata.com.sa</field>
+        <field name="reply_to">sales@udata.com.sa</field>
         <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
@@ -884,7 +1612,7 @@
                                                     <span style="font-size: 10px;">Your Subscription</span>
                                                     <br/>
                                                     <span style="font-size: 20px; font-weight: bold;"
-                                                          t-out="object.name or ''">Office Cleaning Service
+                                                          t-out="object.name or ''">
                                                     </span>
                                                 </td>
                                             </tr>
@@ -911,30 +1639,22 @@
                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                             <tr>
                                                 <td valign="top" style="font-size: 13px;">
-                                                    Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
+                                                    Hello <t t-out="object.partner_id.name or ''"></t>,
                                                     <br/>
                                                     <br/>
+                                                    Your Subscription Is Closed
                                                     <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
-                                                        Your Subscription Is Closed
                                                         <t t-out="ctx['payment_token'] or ''">TOKEN</t>
                                                         for
                                                         <t t-out="ctx['total_amount'] or ''">10</t>
                                                         <t t-out="ctx.get('currency') or ''">$</t>.
-<!--                                                        <t t-if="ctx.get('error')">-->
-<!--                                                            Your bank or credit institution gave the following details-->
-<!--                                                            about the issue: <pre t-out="ctx['error'] or ''"></pre>.-->
-<!--                                                        </t>-->
-                                                    </t>
-                                                    <t t-else="">
-<!--                                                        We were unable to process a payment for your subscription-->
-<!--                                                        because we have no payment method recorded for you and Your Subscription Is Closed.-->
                                                     </t>
                                                     <br/>
                                                     <br/>
-                                                    Your subscription <t t-out="ctx.get('code') or ''">CODE</t>
+                                                    Your subscription <t t-out="object.name or ''"></t> is
                                                     <strong>Closed</strong>
-                                                    on <t t-out="format_date(ctx.get('date_close')) or ''">
-                                                </t> due to non-renew the subscription by paying the required amount.
+                                                    on <t t-out="object.date or ''"></t> due to non-payment. you can
+                                                    renew your subscription by paying the required amount.
                                                     <br/>
                                                     <br/>
                                                     If you have any questions, do not hesitate to contact us.
@@ -1015,13 +1735,152 @@
                     </td>
                 </tr>
             </table>
+
+            <table border="0" cellpadding="0" cellspacing="0"
+                   style="padding-top: 16px; background-color: #F1F1F1; font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
+                <style>@font-face {
+                    font-family: 'Tajawal-Regular';
+                    src: local('Tajawal'), local('Tajawal'),
+                    url(/subscription_customizations/static/src/fonts/Tajawal-Regular.ttf) format('opentype');
+                    }
+                </style>
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table dir="rtl" border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    الاشتراك: انتهت مدة الإشتراك
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="right">
+                                                    <img t-attf-src="/logo.png?company={{ company.id }}"
+                                                         style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                         t-att-alt="company.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="top" style="font-size: 13px;">
+                                                    <div dir="rtl">
+                                                        <span>
+                                                            <t t-out="object.partner_id.name or ''"></t>
+                                                        </span>
+                                                        <span style="float:right">مرحبًا</span>
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+
+                                                    <div dir="rtl">
+                                                        اشتراكك لازال ساريا، وسوف سيتم تعليقه بتاريخ
+                                                        <span>
+                                                            <t t-out="object.date or ''"></t>
+                                                        </span>
+                                                        ما لم يتد الدفع قبل ذلك،
+                                                    </div>
+                                                    <div dir="rtl">إذا كان لديك أي أسئلة، فلا تتردد في الاتصال بنا.
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <div dir="rtl">شكرا لاختيارك UDATA !</div>
+                                                    <div>
+                                                        <t t-if="user.signature">
+                                                            <br/>
+                                                            <br/>
+                                                            <t t-out="user.signature or ''">--<br/>Mitchell Admin
+                                                            </t>
+                                                        </t>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                               style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="left">
+                                                    <t t-out="company.name or ''">YourCompany</t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="middle" align="left" style="opacity: 0.7;">
+                                                    <t t-if="company.phone">
+                                                        <t t-out="company.phone or ''">+1 650-123-4567</t>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.email">
+                                                        <a t-attf-href="'mailto:%s' % {{ company.email }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.email or ''">info@yourcompany.com
+                                                        </a>
+                                                        |
+                                                    </t>
+                                                    <t t-if="company.website">
+                                                        <a t-attf-href="'%s' % {{ company.website }}"
+                                                           style="text-decoration:none; color: #454748;"
+                                                           t-out="company.website or ''">http://www.example.com
+                                                        </a>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- POWERED BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                            <tr>
+                                <td style="text-align: center; font-size: 13px;">
+                                    Powered by
+                                    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail"
+                                       style="color: #875A7B;">Odoo
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
         </field>
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
     </record>
-
-
-
-
-
 </odoo>
