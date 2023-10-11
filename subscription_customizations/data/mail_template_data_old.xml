@@ -163,8 +163,7 @@
 
             <table border="0" cellpadding="0" cellspacing="0"
                    style="padding-top: 16px; background-color: #F1F1F1; font-family: 'Tajawal-Regular'; color: #454748; width: 100%; border-collapse:separate;">
-                <style>
-                    @font-face {
+                <style>@font-face {
                     font-family: 'Tajawal-Regular';
                     src: local('Tajawal'), local('Tajawal'),
                     url(/subscription_customizations/static/src/fonts/Tajawal-Regular.ttf) format('opentype');
@@ -190,7 +189,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="middle" align="left">
+                                                <td valign="middle" align="right">
                                                     <img t-attf-src="/logo.png?company={{ company.id }}"
                                                          style="padding: 0px; margin: 0px; height: auto; width: 80px;"
                                                          t-att-alt="company.name"/>
@@ -365,7 +364,7 @@
                                                     Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
                                                     <br/>
                                                     <br/>
-                                                    your subscription will expire in 30 days
+                                                    your subscription will expire in 30 days at a Cost
 <!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
 
 <!--                                                        <t t-out="ctx['payment_token'] or ''">TOKEN</t>-->
@@ -373,13 +372,13 @@
 <!--                                                        <t t-out="ctx['total_amount'] or ''">10</t>-->
 <!--                                                        <t t-out="ctx.get('currency') or ''">$</t>-->
 <!--                                                    </t>-->
-                                                    at a Cost
                                                     <span>
                                                         <span>
                                                             <t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t>
                                                         </span>
-                                                        <span style="margin-left:2px"><t t-out="object.currency_id.name or ''"></t></span>
-                                                        <!--                                                                <t t-out="ctx.get('currency') or ''">$</t>-->
+                                                        <span style="margin-left:2px">
+                                                            <t t-out="object.currency_id.name or ''"></t>
+                                                        </span>
                                                     </span>
                                                     .please make the
                                                     payment as soon as possible to avoided interruption in the
@@ -497,7 +496,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="middle" align="left">
+                                                <td valign="middle" align="right">
                                                     <img t-attf-src="/logo.png?company={{ company.id }}"
                                                          style="padding: 0px; margin: 0px; height: auto; width: 80px;"
                                                          t-att-alt="company.name"/>
@@ -527,20 +526,22 @@
                                                     </div>
                                                     <br/>
                                                     <br/>
-                                                     <div dir="rtl">
-                                                         <span>سينتهي اشتراكك خلال 30 يومًا القادمة بتكلفة</span>
-                                                         <!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
-
-                                                         <span>
+                                                    <span>سينتهي اشتراكك خلال 30 يومًا القادمة بتكلفة</span>
+<!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
+<!--                                                        <div dir="rtl">-->
+<!--                                                            <span>-->
+<!--                                                                <t t-out="ctx['total_amount'] or ''">10</t>-->
+<!--                                                                <t t-out="ctx.get('currency') or ''">$</t>-->
+<!--                                                            </span>-->
+<!--                                                        </div>-->
+<!--                                                    </t>-->
+                                                       <span>
                                                              <span><t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t></span><span style="margin-left:3px"><t t-out="object.currency_id.name or ''"></t></span>
                                                          </span>
-
-                                                         <!--                                                    </t>-->
-                                                         <span>
+                                                    <span>
                                                         . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
                                                         عنكم.
                                                     </span>
-                                                     </div>
                                                     <br/>
                                                     <br/>
                                                     <div dir="rtl">
@@ -691,15 +692,6 @@
                                                     <br/>
                                                     <br/>
                                                     your subscription will expire in 15 days at a cost
-                                                    <span>
-                                                        <span>
-                                                            <t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t>
-                                                        </span>
-                                                        <span style="margin-left:2px">
-                                                            <t t-out="object.currency_id.name or ''"></t>
-                                                        </span>
-                                                        <!--                                                                <t t-out="ctx.get('currency') or ''">$</t>-->
-                                                    </span>
 <!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
 
 <!--                                                        <t t-out="ctx['payment_token'] or ''">TOKEN</t>-->
@@ -708,6 +700,14 @@
 <!--                                                        <t t-out="ctx.get('currency') or ''">$</t>-->
 
 <!--                                                    </t>-->
+                                                    <span>
+                                                        <span>
+                                                            <t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t>
+                                                        </span>
+                                                        <span style="margin-left:3px">
+                                                            <t t-out="object.currency_id.name or ''"></t>
+                                                        </span>
+                                                    </span>
                                                     .please make the payment as soon as possible to avoided interruption
                                                     in the services.
                                                     <br/>
@@ -823,7 +823,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="middle" align="left">
+                                                <td valign="middle" align="right">
                                                     <img t-attf-src="/logo.png?company={{ company.id }}"
                                                          style="padding: 0px; margin: 0px; height: auto; width: 80px;"
                                                          t-att-alt="company.name"/>
@@ -853,26 +853,27 @@
                                                     </div>
                                                     <br/>
                                                     <br/>
-                                                    <div dir="rtl">
-                                                        <span>سينتهي اشتراكك خلال 15 يومًا القادمة بتكلفة.</span>
-                                                        <span><t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t></span><span style="margin-left:2px"><t t-out="object.currency_id.name or ''"></t></span>
-                                                        <!--                                                                <t t-out="ctx.get('currency') or ''">$</t>-->
-                                                        <!--                                                        </t>-->
-                                                        <span>
-                                                             نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
-                                                            عنكم.
-                                                        </span>
-                                                    </div>
+                                                    <span>سينتهي اشتراكك خلال 15 يومًا القادمة بتكلفة</span>
+<!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
+<!--                                                        <div dir="rtl">-->
+<!--                                                            <span>-->
+<!--                                                                <t t-out="ctx['total_amount'] or ''">10</t>-->
+<!--                                                                <t t-out="ctx.get('currency') or ''">$</t>-->
+<!--                                                            </span>-->
+<!--                                                        </div>-->
+<!--                                                    </t>-->
+                                                     <span>
+                                                             <span><t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t></span><span style="margin-left:3px"><t t-out="object.currency_id.name or ''"></t></span>
+                                                     </span>
+                                                    <span>
+                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                        عنكم.
+                                                    </span>
                                                     <br/>
                                                     <br/>
                                                     <div dir="rtl">
-                                                        اشتراكك لا يزال ساريا و سوف يتم تعليقه بتاريخ
-                                                        <span>
-                                                            <t t-out="object.date or ''"></t>
-                                                        </span>
-                                                        ما لم يتم الدفع قبل ذلك
-                                                        اذا كان لديك أي استفسار او فلا تتردد في الاتصال بنا .. يسعدنا
-                                                        خدمتكم !
+                                                        اشتراكك لا يزال ساريا و سوف يتم تعليقه بتاريخ <span><t t-out="object.date or ''"></t></span> ما لم يتم الدفع قبل ذلك
+                                                         اذا كان لديك أي استفسار او فلا تتردد في الاتصال بنا .. يسعدنا خدمتكم !
                                                     </div>
                                                     <br/>
                                                     <br/>
@@ -1019,21 +1020,13 @@
                                                     Hello <t t-out="object.partner_id.name or ''"></t>,
                                                     <br/>
                                                     <br/>
-                                                    your subscription will expire in 3 days at a cost
-<!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
-<!--                                                        <t t-out="ctx['payment_token'] or ''">TOKEN</t>-->
-<!--                                                        for-->
-<!--                                                        <t t-out="ctx['total_amount'] or ''">10</t>-->
-<!--                                                        <t t-out="ctx.get('currency') or ''">$</t>-->
-<!--                                                    </t>-->
-                                                    <span>
-                                                        <span>
-                                                            <t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t>
-                                                        </span>
-                                                        <span style="margin-left:2px">
-                                                            <t t-out="object.currency_id.name or ''"></t>
-                                                        </span>
-                                                    </span>
+                                                    your subscription will expire in 3 days
+                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">
+                                                        <t t-out="ctx['payment_token'] or ''">TOKEN</t>
+                                                        for
+                                                        <t t-out="ctx['total_amount'] or ''">10</t>
+                                                        <t t-out="ctx.get('currency') or ''">$</t>
+                                                    </t>
                                                     .please make the payment as soon as possible to avoided interruption
                                                     in the services.
                                                     <br/>
@@ -1148,7 +1141,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="middle" align="left">
+                                                <td valign="middle" align="right">
                                                     <img t-attf-src="/logo.png?company={{ company.id }}"
                                                          style="padding: 0px; margin: 0px; height: auto; width: 80px;"
                                                          t-att-alt="company.name"/>
@@ -1178,18 +1171,27 @@
                                                     </div>
                                                     <br/>
                                                     <br/>
-                                                    <div dir="rtl">
-                                                        <span>سينتهي اشتراكك خلال 3 يومًا القادمة بتكلفة.</span>
-                                                        <span><t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t></span><span style="margin-left:2px"><t t-out="object.currency_id.name or ''"></t></span>
-                                                        <span>
-                                                             نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
-                                                            عنكم.
-                                                        </span>
-                                                    </div>
+                                                    <span>سينتهي اشتراكك خلال 3 يومًا القادمة بتكلفة</span>
+<!--                                                    <t t-if="ctx.get('payment_token') and ctx.get('total_amount')">-->
+<!--                                                        <div dir="rtl">-->
+
+<!--                                                            <span>-->
+<!--                                                                <t t-out="ctx['total_amount'] or ''">10</t>-->
+<!--                                                                <t t-out="ctx.get('currency') or ''">$</t>-->
+<!--                                                            </span>-->
+<!--                                                        </div>-->
+<!--                                                    </t>-->
+                                                     <span>
+                                                             <span><t t-out="'{:,.2f}'.format(object.recurring_total) or ''"></t></span><span style="margin-left:3px"><t t-out="object.currency_id.name or ''"></t></span>
+                                                         </span>
+                                                    <span>
+                                                        . نرجو منك تكرما تجديد الاشتراك، وذلك لتفادي انقطاع الخدمة
+                                                        عنكم.
+                                                    </span>
                                                     <br/>
                                                     <br/>
 
-                                                    <div dir="rtl">
+                                                   <div dir="rtl">
                                                         اشتراكك لا يزال ساريا و سوف يتم تعليقه بتاريخ <span><t t-out="object.date or ''"></t></span> ما لم يتم الدفع قبل ذلك
                                                          اذا كان لديك أي استفسار او فلا تتردد في الاتصال بنا .. يسعدنا خدمتكم !
                                                     </div>
@@ -1456,7 +1458,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="middle" align="left">
+                                                <td valign="middle" align="right">
                                                     <img t-attf-src="/logo.png?company={{ company.id }}"
                                                          style="padding: 0px; margin: 0px; height: auto; width: 80px;"
                                                          t-att-alt="company.name"/>
@@ -1875,8 +1877,6 @@
                     </td>
                 </tr>
             </table>
-
-
         </field>
         <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True"/>
