@@ -1,6 +1,136 @@
 <odoo>
     <template id="customize_sale_order_portal_inherit" name="Sale Order Portal"
               inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//div[@id='informations']" position="replace">
+            <div id="informations">
+                <div t-if="sale_order.transaction_ids and not invoices and sale_order.state in ('sent', 'sale') and portal_confirmation == 'pay' and not success and not error"
+                     t-att-data-order-id="sale_order.id">
+                    <t t-if="sale_order.transaction_ids">
+                        <t t-call="payment.transaction_status">
+                            <t t-set="tx" t-value="sale_order.get_portal_last_transaction()"/>
+                        </t>
+                    </t>
+                </div>
+                <div class="row" id="so_date">
+                    <div class="mb-3 col-6">
+                        <t t-if="sale_order.state in ['sale', 'done', 'cancel']">
+                            <strong>Order Date:</strong>
+                        </t>
+                        <t t-else="">
+                            <strong>Quotation Date:</strong>
+                        </t>
+                        <span t-field="sale_order.date_order" t-options='{"widget": "date"}'/>
+                    </div>
+                    <div class="mb-3 col-6" t-if="sale_order.validity_date">
+                        <strong>Expiration Date:</strong>
+                        <span t-field="sale_order.validity_date" t-options='{"widget": "date"}'/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <strong t-if="sale_order.partner_shipping_id == sale_order.partner_invoice_id"
+                                class="d-block mb-1">Invoicing and Shipping Address:
+                        </strong>
+                        <strong t-if="sale_order.partner_shipping_id != sale_order.partner_invoice_id"
+                                class="d-block mb-1">Invoicing Address:
+                        </strong>
+                        <!--                        <address t-field="sale_order.partner_invoice_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>-->
+
+                        <t t-if="sale_order.partner_invoice_id.company_type == 'company'">
+                            <div class="small d-block mb-1 ">
+                                <span style="width: 60px; display: inline-block;">Company:</span>
+                                <span class="text-muted" t-field="sale_order.partner_invoice_id.name"/>
+                            </div>
+                        </t>
+                        <t t-if="sale_order.partner_invoice_id.parent_id">
+                            <div class="small d-block mb-1">
+                                <span style="width: 60px; display: inline-block;">Company:</span>
+                                <span class="text-muted"
+                                      t-field="sale_order.partner_invoice_id.parent_id.name"/>
+                            </div>
+                        </t>
+                        <t t-if="sale_order.partner_invoice_id.parent_id and sale_order.partner_invoice_id.name">
+                            <div class="small d-block mb-1">
+                                <span style="width: 60px; display: inline-block;">Contact:</span>
+                                <span class="text-muted"
+                                      t-field="sale_order.partner_invoice_id.name"/>
+                            </div>
+                        </t>
+                        <t t-if="sale_order.partner_invoice_id.company_type == 'person' and not sale_order.partner_invoice_id.parent_id">
+                            <div class="small d-block mb-1">
+                                <span style="width: 60px; display: inline-block;">Contact:</span>
+                                <span class="text-muted"
+                                      t-field="sale_order.partner_invoice_id.name"/>
+                            </div>
+                        </t>
+                        <t t-if="sale_order.partner_invoice_id.mobile">
+                            <div class="small d-block mb-1">
+                                <span style="width: 60px; display: inline-block;">Mobile:</span>
+                                <span class="text-muted"
+                                      t-field="sale_order.partner_invoice_id.mobile"/>
+                            </div>
+                        </t>
+                        <t t-if="sale_order.partner_invoice_id.vat">
+                            <div class="small d-block mb-1">
+                                <span style="width: 60px; display: inline-block;">Tax ID:</span>
+                                <span class="text-muted"
+                                      t-field="sale_order.partner_invoice_id.vat"/>
+                            </div>
+                        </t>
+                        <t t-if="sale_order.partner_invoice_id.email">
+                            <div class="small d-block mb-1">
+                                <span style="width: 60px; display: inline-block;">Email:</span>
+                                <span class="text-muted"
+                                      t-field="sale_order.partner_invoice_id.email"/>
+                            </div>
+                        </t>
+
+                        <!--                        <div class="small d-lg-inline-block">Company name : <span class="text-muted" t-field="sale_order.partner_invoice_id.name"/></div>-->
+                        <!--                        <div class="small d-lg-inline-block">Company Contact : <span class="text-muted" t-field="sale_order.partner_invoice_id.phone"/></div>-->
+                    </div>
+                    <t t-if="sale_order.partner_shipping_id != sale_order.partner_invoice_id">
+                        <div id="shipping_address" class="col-lg-6">
+                            <strong class="d-block mb-1">Shipping Address:</strong>
+                            <address t-field="sale_order.partner_shipping_id"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                        </div>
+                    </t>
+                </div>
+
+                <t t-set="invoices"
+                   t-value="[i for i in sale_order.invoice_ids if i.state not in ['draft', 'cancel']]"/>
+                <div t-if="invoices" class="row">
+                    <div class="col">
+                        <strong class="d-block mb-1">Invoices</strong>
+                        <ul class="list-group mb-4">
+                            <t t-foreach="invoices" t-as="i">
+                                <t t-set="report_url" t-value="i.get_portal_url(report_type='pdf', download=True)"/>
+                                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                    <div>
+                                        <a t-att-href="report_url">
+                                            <span t-esc="i.name"/>
+                                        </a>
+                                        <div class="small d-lg-inline-block">Date:
+                                            <span class="text-muted" t-field="i.invoice_date"/>
+                                        </div>
+                                    </div>
+                                    <span t-if="i.payment_state in ('paid', 'in_payment')"
+                                          class="small badge badge-success orders_label_text_align">
+                                        <i class="fa fa-fw fa-check"/>
+                                        <b>Paid</b>
+                                    </span>
+                                    <span t-else="" class="small badge badge-info orders_label_text_align">
+                                        <i class="fa fa-fw fa-clock-o"/>
+                                        <b>Waiting Payment</b>
+                                    </span>
+                                </div>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
         <xpath expr="//table[@id='sales_order_table']/thead" position="replace">
             <thead class="bg-100">
                 <tr>
