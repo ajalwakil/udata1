@@ -1,0 +1,281 @@
+<odoo>
+    <data>
+        <template id="report_receipt_voucher_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <t t-set="forced_vat"
+                   t-value="o.fiscal_position_id.foreign_vat"/>
+                <div dir="ltr" class="page">
+                    <div style="border:2px solid #000;width:100%;padding-bottom:5px;clear:both">
+                        <div style="border-bottom:0px solid #000;">
+                            <div style="padding:10px">
+                                <div style="text-align:center">
+                                    <h4>
+                                        <span>Receipt Voucher سند قبض</span>
+                                        <br/>
+                                        <span t-esc="o.name"></span>
+                                    </h4>
+                                </div>
+                                <br/>
+                                <div style="clear:both">
+                                    <div style="float:left;width:35%">
+                                        <div style="float:left;">Date :</div>
+                                        <div style="text-align:center;margin-left:7px;float:left;width:185px;height:20px;border-bottom:1px dashed #000">
+                                            <span style="" t-esc="o.date"></span>
+                                        </div>
+                                        <div style="float:right;">: التاريخ</div>
+                                    </div>
+                                    <div style="float:right;width:25%;margin-top:-30px;">
+                                        <div style="float:left;">Amount</div>
+                                        <!--                                        <div style="margin-left:7px;float:left;width:195px;height:17px;border-bottom:1px dashed #000"></div>-->
+                                        <div style="float:right;margin-right:30px">المبلغ</div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div style="width:100%;clear:both">
+                                    <div style="float:left;width:60%">
+                                        <div style="text-align:right;height:20px;border-bottom:1px dashed #000">
+                                            <span style="margin-right:10px" t-esc="o.amount_word(o.amount)"/>
+                                        </div>
+                                        <div style="text-align:right;height:25px;border-bottom:1px dashed #000"></div>
+                                    </div>
+                                    <div style="float:right;margin-right:18px">
+                                        <div style="padding-top:5px;margin-top:-30px;border-radius:10px;text-align:center;width:200px;height:50px;border:2px solid #000;font-size:25px">
+                                            <span t-esc="'{:,.2f}'.format(o.amount)"/>
+                                        </div>
+                                        <!--                                        <div style="float:left;">Amount :</div>-->
+                                        <!--                                        <div style="margin-left:7px;float:left;width:195px;height:17px;border-bottom:1px dashed #000"></div>-->
+                                        <!--                                        <div style="float:right;">: كمية</div>-->
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                        <div style="width:100%;border-bottom:2px solid #000;clear:both;padding:20px 10px;display:inline-block">
+                            <div style="width:100%;">
+                                <div style="width:15%;float:left;">Received from :</div>
+                                <div style="text-align:right;width:75%;float:left;height:24px;border-bottom:1px dashed #000">
+                                    <span style="margin-right:15px;" t-esc="o.partner_id.name"></span>
+                                </div>
+                                <div style="text-align:right;width:10%;float:right;">: استلمنا من</div>
+                            </div>
+                            <div style="text-align:right;margin-right:80px">
+                                <div style="width:300px;float:right;margin-top:15px">
+                                    <span style="margin-right:10px">Cash</span>
+                                    <span style="margin-right:10px">
+                                        <t t-if="o.cash_cheq_type == 'cash'">
+                                            <input t-if="o.cash_cheq_type == 'cash'" type="checkbox" value="True"
+                                                   checked="checked"/>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox"></input>
+                                        </t>
+                                    </span>
+                                    <span>نقدا</span>
+                                </div>
+                            </div>
+                            <!--                            <div style="text-align:right;margin-right:80px">-->
+                            <!--                                <div style="width:300px;float:right;margin-top:15px;">-->
+                            <!--                                    <span style="margin-right:10px">Cash</span>-->
+                            <!--                                    <span style="margin-right:10px">-->
+                            <!--                                        <t t-if="o.cash_cheq_type == 'cash'">-->
+                            <!--                                            <input t-if="o.cash_cheq_type == 'cash'" type="checkbox" value="True"-->
+                            <!--                                                   checked="checked"/>-->
+                            <!--                                        </t>-->
+                            <!--                                        <t t-else="">-->
+                            <!--                                            <input type="checkbox"></input>-->
+                            <!--                                        </t>-->
+                            <!--                                    </span>-->
+                            <!--                                    <span>نقدا</span>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <br/>
+                            <div style="text-align:right;clear:both">
+                                <div style="width:270px;float:left;margin-top:10px;">
+                                    <div style="float:left;margin-right:10px">Bank :</div>
+                                    <div style="float:left;width:180px;height:23px;border-bottom:1px dashed #000">
+                                        <t t-if="o.cash_cheq_type == 'cheq'">
+                                            <span t-esc="o.bank_name"></span>
+                                        </t>
+                                    </div>
+                                    <div style="float:right">: بنك</div>
+                                </div>
+                                <div style="margin-left:10px;width:270px;float:left;margin-top:10px">
+                                    <div style="float:left;margin-right:10px">NO :</div>
+                                    <div style="float:left;width:190px;height:23px;border-bottom:1px dashed #000">
+                                        <t t-if="o.cash_cheq_type == 'cheq'">
+                                            <span t-esc="o.cheq_no"></span>
+                                        </t>
+                                    </div>
+                                    <div style="float:right">: رقم</div>
+                                </div>
+                                <!--                                <div style="width:250px;float:right;margin-top:10px;margin-right:5px;padding-right:70px">-->
+
+                                <!--                                    <span style="margin-right:10px">Cheq</span>-->
+                                <!--                                    <span style="margin-right:10px">-->
+                                <!--                                        <t t-if="o.cash_cheq_type == 'cheq'">-->
+                                <!--                                            <input t-if="o.cash_cheq_type == 'cheq'" type="checkbox" value="True"-->
+                                <!--                                                   checked="checked"/>-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-else="">-->
+                                <!--                                            <input type="checkbox"></input>-->
+                                <!--                                        </t>-->
+                                <!--                                    </span>-->
+                                <!--                                    <span style="">شيك</span>-->
+                                <!--                                </div>-->
+
+                                <div style="width:250px;float:right;margin-top:10px;margin-right:5px;padding-right:10px">
+                                    <span style="margin-right:10px">Cheq/Transfer</span>
+                                    <span style="margin-right:10px">
+                                        <t t-if="o.cash_cheq_type == 'cheq'">
+                                            <input t-if="o.cash_cheq_type == 'cheq'" type="checkbox" value="True"
+                                                   checked="checked"/>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox"></input>
+                                        </t>
+                                    </span>
+                                    <span style="margin-right:10px">تحويل/شيك</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:100%;border-bottom:2px solid #000;clear:both;padding:20px 10px;display:inline-block">
+                            <div style="width:100%;">
+                                <div style="width:5%;float:left;">For :</div>
+                                <div style="text-align:right;width:85%;float:left;height:23px;border-bottom:1px dashed #000">
+                                    <span dir="rtl" style="margin-right:10px;float:right" t-esc="o.ref"></span>
+                                </div>
+                                <div style="text-align:right;width:10%;float:right;">: و ذلك عن</div>
+                            </div>
+                            <br/>
+                            <div style="width:100%;">
+                                <div style="width:5%;float:left;color:#fff">For :</div>
+                                <div style="width:85%;float:left;height:23px;border-bottom:1px dashed #000"></div>
+                                <div style="text-align:right;width:10%;float:right;"></div>
+                            </div>
+                            <br/>
+                            <div style="width:100%;">
+                                <div style="width:5%;float:left;color:#fff">For :</div>
+                                <div style="width:85%;float:left;height:23px;border-bottom:1px dashed #000"></div>
+                                <div style="text-align:right;width:10%;float:right;"></div>
+                            </div>
+                        </div>
+                        <div style="width:100%;clear:both;padding:20px 10px;display:inline-block">
+                            <div style="width:200px;float:left">
+                                <br/>
+                                <br/>
+                                <div style="text-align:center;width:200px;height:23px;border-bottom:1px dashed #000">
+                                    <span t-esc="o.user_id_x.name"></span>
+                                </div>
+                                <div style="float:left">Accountant</div>
+                                <div style="float:right">المحاسب</div>
+                            </div>
+                            <!--                            <div style="margin-left:90px;width:200px;float:left">-->
+                            <!--                                <br/>-->
+                            <!--                                <br/>-->
+                            <!--                                <div style="width:200px;height:5px;border-top:1px dashed #000"></div>-->
+                            <!--                                <div style="float:left;margin-right:130px">Stamp</div>-->
+                            <!--                                <span> ختم </span>-->
+                            <!--                            </div>-->
+                            <div style="width:200px;float:right">
+                                <br/>
+                                <br/>
+                                <div style="width:200px;height:23px;border-bottom:1px dashed #000"></div>
+                                <div style="float:left">Receiver</div>
+                                <div style="float:right">المستلم</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                <div style="font-weight:bold" class="page">-->
+                <!--                    <div style="margin-top:145px">-->
+                <!--                        <div style="text-align:center">-->
+                <!--                            <h4>-->
+                <!--                                <span>Cash Voucher</span>-->
+                <!--                            </h4>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+
+                <!--                    <div>-->
+                <!--                        <div style="float:left;width:70%">-->
+                <!--                            <div style="float:left;">Date</div>-->
+                <!--                            <div style="float:left;margin-left:5px;width:120px;height:18px;">-->
+                <!--                                <span t-esc="o.date"></span>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div>-->
+                <!--                            <div style="float:left;">Sr #</div>-->
+                <!--                            <div style="float:left;margin-left:5px;width:150px;height:18px;">-->
+                <!--                                <span t-esc="o.name"></span>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+                <!--                    <table style="font-size:13px" class="table table-sm">-->
+                <!--                        <thead style="border-bottom:1px solid #000;">-->
+                <!--                            <tr>-->
+                <!--                                <th style="width:75%;" class="text-center" name="th_party_detail">-->
+                <!--                                    <span>Party Detail</span>-->
+                <!--                                </th>-->
+                <!--                                <th style="border:1px solid #000" class="text-center" name="th_amount">-->
+                <!--                                    <span>Amount</span>-->
+                <!--                                </th>-->
+                <!--                            </tr>-->
+                <!--                        </thead>-->
+                <!--                        <tbody>-->
+                <!--                            <tr>-->
+                <!--                                <td style="width:75%;border-bottom:1px solid #000;height:40px">-->
+                <!--                                    <span t-esc="o.partner_id.name"></span>-->
+                <!--                                </td>-->
+                <!--                                <td style="border-bottom:1px solid #000;background-color:#fff">-->
+                <!--                                    <span t-esc="'{:,.0f}'.format(o.amount)"></span>-->
+                <!--                                </td>-->
+                <!--                            </tr>-->
+                <!--                        </tbody>-->
+                <!--                    </table>-->
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+                <!--                    <table style="font-size:13px" class="table table-sm">-->
+                <!--                        <tr>-->
+                <!--                            <td class="text-center" style="width:8%;">-->
+                <!--                                <b>In word</b>-->
+                <!--                            </td>-->
+                <!--                            <td style="background-color:#fff">-->
+                <!--                                <span t-esc="o.amount_to_text(o.amount, o.currency_id)"/>-->
+                <!--                            </td>-->
+                <!--                        </tr>-->
+                <!--                    </table>-->
+
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+                <!--                    <div style="">-->
+                <!--                        <div style="width:100px;height:20px;border-top:1px solid black;padding-top:3px;float:left">-->
+                <!--                            <span>Prepare By</span>-->
+                <!--                        </div>-->
+                <!--                        <div style="width:100px;height:20px;border-top:1px solid black;padding-top:3px;;float:left;margin-left:150px">-->
+                <!--                            <span>Dispatch By</span>-->
+                <!--                        </div>-->
+                <!--                        <div style="width:100px;height:20px;border-top:1px solid black;padding-top:3px;;float:left;margin-left:150px">-->
+                <!--                            <span>Authorized By</span>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </t>
+        </template>
+        <template id="report_receipt_voucher">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-set="print_with_payments" t-value="True"/>
+                    <t t-call="payment_vocher_reports.report_receipt_voucher_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

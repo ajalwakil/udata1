@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+<!--        <record id="account_payment_form_view_new_inherit" model="ir.ui.view">-->
+<!--            <field name="name">account.payment.form.inherit</field>-->
+<!--            <field name="model">account.payment</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_payment_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//header/button[@name='mark_as_sent']" position="after">-->
+<!--                    <button name="%(payment_vocher_reports.action_report_receipt_voucher)d" string="Print Receipt"-->
+<!--                            type="action"-->
+<!--                            class="oe_highlight"-->
+<!--                            attrs="{'invisible': [('payment_type', '!=', 'inbound')]}"-->
+<!--                            data-hotkey="v"/>-->
+<!--                    <button name="%(payment_vocher_reports.action_report_cash_voucher)d" string="Print Payment"-->
+<!--                            type="action"-->
+<!--                            class="oe_highlight"-->
+<!--                            attrs="{'invisible': [('payment_type', '!=', 'outbound')]}"-->
+<!--                            data-hotkey="v"/>-->
+
+<!--                </xpath>-->
+<!--                <field name="journal_id" position="after">-->
+<!--                    <field name="cash_cheq_type"/>-->
+<!--                    <field name="user_id_x" />-->
+<!--                    <field name="bank_name"/>-->
+<!--                    <field name="cheq_no"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>
