@@ -1,0 +1,12 @@
+<odoo>
+    <record id="ir_cron_set_company_product" model="ir.cron">
+        <field name="name">Set Company for Product</field>
+        <field name="model_id" ref="model_product_product"/>
+        <field name="interval_number">1</field> <!-- Set the desired frequency -->
+        <field name="interval_type">days</field> <!-- You can change this to hours, minutes, etc. -->
+        <field name="numbercall">-1</field> <!-- Set to -1 for unlimited runs or a specific number -->
+        <field name="doall" eval="True"/>
+        <field name="active" eval="False"/>
+        <field name="code">model.set_company_product()</field>
+    </record>
+</odoo>
