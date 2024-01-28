@@ -11,9 +11,9 @@
                         <strong>Your Order Reference:</strong>
                         <p t-field="o.partner_ref" class="m-0"/>
                     </div>
-                    <div t-if="o.date_order" class="col-3 bm-2">
+                    <div t-if="o.date_approve" class="col-3 bm-2">
                         <strong>Order Date:</strong>
-                        <p t-field="o.date_order" class="m-0"/>
+                        <p t-field="o.date_approve" class="m-0"/>
                     </div>
                     <div t-if="o.approved_by_id" class="col-3 bm-2">
                         <strong>Approved By:</strong>
