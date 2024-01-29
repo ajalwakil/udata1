@@ -21,7 +21,7 @@ class SaleOrder(models.Model):
     Customer_hide = fields.Boolean('Customer hide')
     Customer_name = fields.Char('Customer Name')
     Customer_company = fields.Char('Customer Company')
-    Customer_phone = fields.Char('Customer Phone')
+    Customer_phone = fields.Char('Customer Mobile')
     Customer_email = fields.Char('Customer Email')
 
 
