@@ -36,5 +36,5 @@ class CrmLeadInherit(models.Model):
         action['context']['default_Customer_name'] = self.contact_name
         action['context']['default_Customer_company'] = self.partner_name
         action['context']['default_Customer_phone'] = self.mobile
-        # action['context']['default_Customer_email'] = self.contact_name
+        action['context']['default_Customer_email'] = self.contact_name
         return action
