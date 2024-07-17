@@ -9,7 +9,14 @@
             <xpath expr="//form/header/button[10]" position="attributes">
             <attribute name="states">draft,sent,purchase</attribute>
         </xpath>
-        
+              <xpath expr="//form/sheet/notebook/page[@name='purchase_delivery_invoice']/group" position="after">
+                      <group>
+                      <group  string = 'Misc'>
+                      <field name="referred_by"/>
+                      </group>
+                      </group>
+                       </xpath>
+                      
               <xpath expr="//form/sheet/notebook/page[@name='purchase_delivery_invoice']" position="after">
                  <page string="End User Information" name="endconsumer_information">
                             <group>

@@ -12,6 +12,7 @@ class PurchaseOrder(models.Model):
     subscription_status = fields.Selection([('new', 'New'), ('renew', 'Renew'), ('addon', 'Add-on')])
     period = fields.Selection([('monthly', 'Monthly'), ('yearly', 'Yearly')])
     approved_by_id = fields.Many2one('hr.employee', string='Approved By')
+    referred_by = fields.Many2one('res.partner' , string = 'Referred')
     
     def action_rfq_send(self):
         res = super(PurchaseOrder, self).action_rfq_send()
