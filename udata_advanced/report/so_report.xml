@@ -246,6 +246,7 @@
                                     <t t-if="doc.all_price">
                                         <th name="th_priceunit" class="text-right">U.Price</th>
                                     </t>
+                                    <th name="th_quantity" class="text-right">Unit</th>
                                     <th name="th_quantity" class="text-right">Qty.</th>
                                     <th name="th_discount" t-if="display_discount" class="text-right"
                                         groups="product.group_discount_per_so_line">
@@ -295,6 +296,10 @@
                                                     <span t-field="line.price_unit"/>
                                                 </td>
                                             </t>
+                                             <td name="td_uom" class="text-right">
+                                                <span t-field="line.product_uom"/>
+                                            </td>
+                                            
                                             <td name="td_quantity" class="text-right">
                                                 <span t-field="line.product_uom_qty"/>
                                             </td>
